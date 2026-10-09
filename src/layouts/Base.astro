@@ -1,0 +1,64 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Léon — Issue Nº 01',
+  description = 'Yang (Léon) Li — Ph.D. student at Université de Montréal working on LLM-based test generation. Projects and writing.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="issue-bar">
+      <div class="wrap">
+        <span>ISSUE Nº 01 — AUTUMN 2026</span>
+        <span>MONTRÉAL, QC</span>
+      </div>
+    </div>
+
+    <header class="masthead">
+      <div class="wrap">
+        <a class="logo" href="/">Lé<em>o</em>n</a>
+        <nav aria-label="Main navigation">
+          <a href="/#about">About</a>
+          <a href="/#projects">Projects</a>
+          <a href="/writing/">Writing</a>
+          <a href="https://github.com/alexli-77" target="_blank" rel="noopener">GitHub ↗</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <span>Colophon — set in Fraunces, Inter &amp; JetBrains Mono.</span>
+        <span>
+          <a href="https://github.com/alexli-77" target="_blank" rel="noopener">GitHub</a> ·
+          <a href="mailto:yang.li.9@umontreal.ca">Email</a> · © 2026 Léon
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>
