@@ -11,14 +11,28 @@ npm install
 npm run dev        # http://localhost:4321
 ```
 
-## Write a post
+## Write a post (Obsidian)
 
-1. `npm run new "Your post title"` — creates `src/content/writing/your-post-title.md` as a draft
-2. Write in Markdown. `npm run dev` shows drafts with a DRAFT badge
-3. Delete the `draft: true` line when it's ready
-4. `git add . && git commit -m "post: your post title" && git push` — GitHub Actions publishes it in ~1 minute
+One-time setup:
 
-Frontmatter fields (see `src/content/writing/_template.md`):
+1. Obsidian → Open folder as vault → `src/content/writing`
+2. Settings → Core plugins → enable **Templates** (already pointed at `_templates/`)
+3. Settings → Community plugins → install **Git** (by Vinzent03) → enable
+4. Git plugin settings → Advanced → turn on **Limit file operations to the vault**
+
+Each post:
+
+1. New note. The file name becomes the URL: `Test Oracles.md` → `/writing/test-oracles/`
+2. Command palette → **Templates: Insert template** → `post`, then write
+3. Paste images directly; they land in `images/` and work as-is
+4. Delete the `draft: true` line when it's ready
+5. Command palette → **Git: Commit-and-sync** — the site updates in about a minute
+
+Preview before publishing: `npm run dev` → http://localhost:4321/writing/ (drafts show with a DRAFT badge).
+
+Without Obsidian: `npm run new "Post title"` creates the same file from the terminal.
+
+Frontmatter fields:
 
 | field   | required | notes                                   |
 | ------- | -------- | --------------------------------------- |
@@ -28,11 +42,9 @@ Frontmatter fields (see `src/content/writing/_template.md`):
 | `kind`  | no       | `Essay` / `Research` / `Notes`          |
 | `draft` | no       | `true` = local only, never published    |
 
-Images: put them in `public/images/` and reference as `![alt](/images/file.png)`.
-
 ## Where things live
 
 - `src/pages/index.astro` — about, projects, latest writing
-- `src/content/writing/` — blog posts (Markdown)
+- `src/content/writing/` — blog posts (Markdown); also the Obsidian vault
 - `src/styles/global.css` — all styles; palette variables at the top
 - `.github/workflows/deploy.yml` — build + deploy on push to `main`

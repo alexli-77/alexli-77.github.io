@@ -3,3 +3,8 @@ dist
 .astro
 .DS_Store
 *.log
+
+# Obsidian: keep shared settings, ignore per-machine state
+src/content/writing/.obsidian/*
+!src/content/writing/.obsidian/app.json
+!src/content/writing/.obsidian/templates.json
