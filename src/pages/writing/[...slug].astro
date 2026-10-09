@@ -12,7 +12,7 @@ const { post } = Astro.props as { post: Post };
 const { Content } = await render(post);
 ---
 
-<Base title={`${post.data.title} — Léon`} description={post.data.dek}>
+<Base title={`${post.data.title} — Léon`} description={post.data.dek} type="article" publishedTime={post.data.date}>
   <article class="article">
     <div class="wrap">
       <header class="article-head">
