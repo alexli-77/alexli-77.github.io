@@ -1,47 +1,47 @@
 ---
 import Base from '../layouts/Base.astro';
 import { type Lang } from '../i18n';
+import { brandIcons, type Brand } from '../icons';
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
+
+// Fill in a value to show it on the page; empty entries are hidden.
 const EMAIL = 'yang.li.9@umontreal.ca';
+const WHATSAPP = ''; // e.g. '+1-514-555-0100'
+const socials: { brand: Brand; label: string; url: string }[] = [
+  { brand: 'linkedin', label: 'LinkedIn', url: '' },
+  { brand: 'github', label: 'GitHub', url: 'https://github.com/alexli-77' },
+  { brand: 'x', label: 'X', url: '' },
+  { brand: 'facebook', label: 'Facebook', url: '' },
+  { brand: 'instagram', label: 'Instagram', url: '' },
+].filter((s) => s.url);
 
 const copy = {
   en: {
     title: 'Contact — Léon',
-    description: 'Get in touch with Yang (Léon) Li about AI agent research, AI product ideas, or backend systems.',
+    description: 'Get in touch with Yang (Léon) Li.',
     kicker: 'Correspondence · Contact',
-    lede: [
-      "Whether it's research on AI agent observability and energy, an AI product idea at any stage, or a question about backend and search systems, I'd be glad to hear from you.",
-      'The quickest way to reach me is email.',
-    ],
-    email: 'Email',
+    heading: 'Contact',
+    intro: "Let's get to know each other, or just drop me a line.",
+    message: 'If you are looking to get a hold of me, you can drop me a message:',
+    social: 'You can also reach out to me on any social media below.',
     copy: 'Copy',
     copied: 'Copied',
-    topicsKicker: 'Good reasons to write',
-    topics: [
-      'Research on AI agent trajectories, energy, and observability',
-      'AI product ideas, at any stage',
-      'Backend and cloud search architecture',
-      'Collaborations, or just saying hello',
-    ],
   },
   zh: {
     title: '联系 — Léon',
-    description: '联系 Yang (Léon) Li：AI Agent 研究、AI 产品想法或后端系统相关的话题。',
+    description: '联系 Yang (Léon) Li。',
     kicker: '来信 · 联系',
-    lede: [
-      '无论是 AI Agent 可观测性与能耗方面的研究，处在任何阶段的 AI 产品想法，还是后端与搜索系统的问题，都欢迎来信。',
-      '最快的联系方式是邮件。',
-    ],
-    email: '邮箱',
+    heading: '联系',
+    intro: '认识一下吧，或者随时给我留言。',
+    message: '如果你想联系我，可以直接给我发消息：',
+    social: '你也可以通过下面的社交媒体找到我。',
     copy: '复制',
     copied: '已复制',
-    topicsKicker: '适合聊的话题',
-    topics: ['AI Agent 轨迹、能耗与可观测性研究', '任何阶段的 AI 产品想法', '后端与云搜索架构', '合作，或者只是打个招呼'],
   },
 }[lang];
 ---
@@ -51,31 +51,52 @@ const copy = {
     <div class="wrap">
       <div class="cover-head">
         <span class="kicker">{copy.kicker}</span>
-        {lang === 'en' ? <h1>Have an idea? <em>Let's talk.</em></h1> : <h1>有想法？<em>一起聊聊。</em></h1>}
+        <h1>{copy.heading}</h1>
       </div>
 
       <div class="lede">
-        {copy.lede.map((p) => <p>{p}</p>)}
+        <p>{copy.intro}</p>
+        <p>{copy.message}</p>
 
-        <dl class="contact-list">
-          <div>
-            <dt>{copy.email}</dt>
-            <dd><a href={`mailto:${EMAIL}`}>{EMAIL}</a></dd>
+        <ul class="reach">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="2.5" y="5" width="19" height="14" rx="1" />
+              <path d="m3 6 9 7 9-7" />
+            </svg>
+            <a class="spaced" href={`mailto:${EMAIL}`}>{EMAIL}</a>
             <button class="copy-btn" type="button" data-copy={EMAIL} data-done={copy.copied}>{copy.copy}</button>
-          </div>
-          <div>
-            <dt>GitHub</dt>
-            <dd><a href="https://github.com/alexli-77" target="_blank" rel="noopener">github.com/alexli-77 ↗</a></dd>
-          </div>
-        </dl>
-      </div>
+          </li>
+          {
+            WHATSAPP && (
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d={brandIcons.whatsapp} />
+                </svg>
+                <a class="spaced" href={`https://wa.me/${WHATSAPP.replace(/\D/g, '')}`} target="_blank" rel="noopener">
+                  {WHATSAPP}
+                </a>
+              </li>
+            )
+          }
+        </ul>
 
-      <aside class="glance" aria-label={copy.topicsKicker}>
-        <span class="kicker">{copy.topicsKicker}</span>
-        <ol class="topics">
-          {copy.topics.map((topic) => <li>{topic}</li>)}
-        </ol>
-      </aside>
+        <p>{copy.social}</p>
+
+        <ul class="socials">
+          {
+            socials.map((s) => (
+              <li>
+                <a href={s.url} target="_blank" rel="noopener" aria-label={s.label} title={s.label}>
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d={brandIcons[s.brand]} />
+                  </svg>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </section>
 </Base>

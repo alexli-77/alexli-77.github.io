@@ -258,22 +258,28 @@ footer a { color: var(--ink); border-bottom: 1px solid var(--mustard); }
 
 /* ---------- Contact ---------- */
 .contact { min-height: 70vh; }
-.contact .cover-head h1 { max-width: 20ch; }
-.contact-list { margin: 36px 0 0; border-top: 3px solid var(--ink); }
-.contact-list div { display: grid; grid-template-columns: 96px 1fr auto; align-items: baseline; gap: 16px; padding: 22px 0; border-bottom: 1px solid var(--rule); }
-.contact-list dt { font: 400 12px/1.8 var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
-.contact-list dd { margin: 0; font: 600 clamp(20px, 2.4vw, 30px)/1.2 var(--serif); color: var(--ink); overflow-wrap: anywhere; }
-.contact-list dd a { border-bottom: 2px solid var(--mustard); transition: border-color 0.2s; }
-.contact-list dd a:hover { border-color: var(--ink); }
-.copy-btn { font: 500 12px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); background: none; border: 0; border-bottom: 2px solid var(--mustard); padding: 0 0 4px; cursor: pointer; }
+.contact .lede { grid-column: 1 / span 8; }
+/* intro lines are too short for a drop cap */
+.contact .lede p:first-child::first-letter { float: none; font: inherit; color: inherit; padding: 0; }
+.contact .socials a { border-bottom: 0; }
+.reach { list-style: none; margin: 28px 0 32px; padding: 0 0 0 4px; }
+.reach li { display: flex; align-items: center; gap: 18px; padding: 8px 0; }
+.reach svg { width: 28px; height: 28px; flex: none; color: var(--ink); }
+.spaced { font: 600 20px/1.3 var(--sans); letter-spacing: 0.22em; color: var(--ink); overflow-wrap: anywhere; transition: color 0.2s; }
+.spaced:hover { color: var(--mustard-ink); }
+.copy-btn { margin-left: 8px; font: 500 12px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); background: none; border: 0; border-bottom: 2px solid var(--mustard); padding: 0 0 4px; cursor: pointer; }
 .copy-btn:hover { border-color: var(--ink); }
-.topics { list-style: none; margin: 14px 0 0; padding: 0; counter-reset: topic; }
-.topics li { counter-increment: topic; display: grid; grid-template-columns: 40px 1fr; padding: 12px 0; border-bottom: 1px solid var(--rule); font-size: 15px; color: var(--ink); }
-.topics li::before { content: counter(topic, decimal-leading-zero); font: 400 12px/1.9 var(--mono); color: var(--mustard-ink); }
+.socials { list-style: none; display: flex; flex-wrap: wrap; gap: 44px; margin: 44px 0 0; padding: 0 0 0 4px; }
+.socials a { display: block; color: var(--ink); transition: color 0.2s; }
+.socials a:hover { color: var(--mustard-ink); }
+.socials svg { display: block; width: 36px; height: 36px; }
 
+@media (max-width: 960px) {
+  .contact .lede { grid-column: 1 / -1; }
+}
 @media (max-width: 640px) {
-  .contact-list div { grid-template-columns: 1fr auto; }
-  .contact-list dt { grid-column: 1 / -1; }
+  .spaced { font-size: 16px; letter-spacing: 0.1em; }
+  .reach li { gap: 14px; }
 }
 
 /* ---------- Chinese ---------- */

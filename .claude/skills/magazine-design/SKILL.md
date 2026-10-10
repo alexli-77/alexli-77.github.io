@@ -50,7 +50,7 @@ Every page exists at `/` (English) and `/zh/` (Chinese). Route files in `src/pag
 ## Don't
 
 - Pixel, retro, or 8-bit elements. They were tried and rejected as clashing with the editorial tone.
-- Emoji, gradients (other than the `.highlight` underline), glassmorphism, or icon libraries.
+- Emoji, gradients (other than the `.highlight` underline), glassmorphism, or icon libraries. The one exception is the brand icons on the contact page (`src/icons.ts`).
 - New colors or fonts. If something seems to need one, use a tint of an existing token.
 - Mustard text smaller than 24px on cream. Use `--mustard-ink`.
 

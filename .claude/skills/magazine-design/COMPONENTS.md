@@ -98,23 +98,13 @@ Dates are `YYYY · MM · DD` in mono. An empty list uses `<p class="empty">…</
 
 Inside `.prose`, a `>` blockquote becomes a pull quote, `---` becomes a `◆ ◆ ◆` break, and the first paragraph gets the drop cap automatically.
 
-## Contact list (label · big serif value · action)
+## Contact methods + social icons (contact page)
 
 ```html
-<dl class="contact-list">
-  <div>
-    <dt>Email</dt>
-    <dd><a href="mailto:…">name@example.com</a></dd>
-    <button class="copy-btn" type="button" data-copy="name@example.com" data-done="Copied">Copy</button>
-  </div>
-</dl>
+<ul class="reach">
+  <li><svg …/><a class="spaced" href="mailto:…">name@example.com</a><button class="copy-btn" …>Copy</button></li>
+</ul>
+<ul class="socials"><li><a href="…" aria-label="GitHub"><svg …/></a></li></ul>
 ```
 
-## Numbered list in a sidebar
-
-```html
-<aside class="glance">
-  <span class="kicker">Good reasons to write</span>
-  <ol class="topics"><li>One line per item</li></ol>
-</aside>
-```
+Brand icon paths live in `src/icons.ts` (inline SVG, `currentColor`). The contact page is the only place icons are used.
