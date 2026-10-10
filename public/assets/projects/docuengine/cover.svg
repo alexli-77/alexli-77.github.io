@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="DocuEngine AI: your facts go to an AI agent that drafts and checks a filing-ready Word document">
+  <style>
+    .h { font: 600 124px Fraunces, Georgia, serif; fill: #102a42; }
+    .sub { font: 400 36px Inter, -apple-system, "Helvetica Neue", Arial, sans-serif; fill: #48647f; }
+    .k { font: 500 22px "JetBrains Mono", ui-monospace, Menlo, monospace; letter-spacing: 0.12em; fill: #7a5c10; }
+    .m { font: 400 22px "JetBrains Mono", ui-monospace, Menlo, monospace; fill: #617d98; }
+    .lbl { font: 600 30px Inter, -apple-system, "Helvetica Neue", Arial, sans-serif; fill: #102a42; }
+    .card { fill: #ffffff; stroke: #102a42; stroke-width: 2.5; }
+    .bar { fill: #dae2ec; }
+    .edge { fill: none; stroke: #c8961e; stroke-width: 5; stroke-linecap: round; }
+  </style>
+  <defs>
+    <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.8" fill="#102a42" opacity="0.14"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="900" fill="#fffaeb"/>
+  <rect width="1600" height="900" fill="url(#dots)"/>
+
+  <text x="110" y="100" class="k">PRODUCT · AI DOCUMENT ENGINE</text>
+  <text x="104" y="226" class="h">DocuEngine <tspan fill="#c8961e">AI</tspan></text>
+  <text x="110" y="288" class="sub">Facts in, filing-ready documents out</text>
+
+  <!-- your facts -->
+  <g>
+    <rect x="120" y="420" width="250" height="76" rx="12" class="card"/>
+    <circle cx="150" cy="458" r="9" fill="#e9b949" stroke="#102a42" stroke-width="2"/>
+    <rect x="174" y="440" width="170" height="12" rx="6" class="bar"/><rect x="174" y="464" width="120" height="12" rx="6" class="bar"/>
+  </g>
+  <g>
+    <rect x="120" y="520" width="250" height="76" rx="12" class="card"/>
+    <circle cx="150" cy="558" r="9" fill="#e9b949" stroke="#102a42" stroke-width="2"/>
+    <rect x="174" y="540" width="150" height="12" rx="6" class="bar"/><rect x="174" y="564" width="170" height="12" rx="6" class="bar"/>
+  </g>
+  <g>
+    <rect x="120" y="620" width="250" height="76" rx="12" class="card"/>
+    <circle cx="150" cy="658" r="9" fill="#e9b949" stroke="#102a42" stroke-width="2"/>
+    <rect x="174" y="640" width="170" height="12" rx="6" class="bar"/><rect x="174" y="664" width="100" height="12" rx="6" class="bar"/>
+  </g>
+  <text x="120" y="742" class="m">your facts</text>
+
+  <path d="M372 458 C 470 458, 500 560, 598 580" class="edge"/>
+  <path d="M372 558 C 460 558, 500 590, 598 592" class="edge"/>
+  <path d="M372 658 C 470 658, 500 620, 598 604" class="edge"/>
+
+  <!-- AI agent -->
+  <circle cx="700" cy="592" r="100" fill="#fceec5" stroke="#102a42" stroke-width="2.5"/>
+  <path d="M700 530 L712 566 L748 578 L712 590 L700 626 L688 590 L652 578 L688 566 Z" fill="#e9b949" stroke="#102a42" stroke-width="2"/>
+  <text x="700" y="660" class="lbl" text-anchor="middle" style="font-size: 26px;">AI agent</text>
+  <text x="700" y="742" class="m" text-anchor="middle">drafts · checks</text>
+
+  <path d="M802 592 L990 592" class="edge" stroke-width="7"/>
+  <path d="M976 578 L996 592 L976 606" fill="none" stroke="#c8961e" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- document -->
+  <path d="M1010 380 H1250 L1310 440 V810 H1010 Z" class="card"/>
+  <path d="M1250 380 V440 H1310" fill="none" stroke="#102a42" stroke-width="2.5"/>
+  <rect x="1046" y="420" width="160" height="18" rx="9" fill="#102a42"/>
+  <rect x="1046" y="476" width="228" height="12" rx="6" class="bar"/>
+  <rect x="1046" y="504" width="200" height="12" rx="6" class="bar"/>
+  <rect x="1046" y="532" width="228" height="12" rx="6" class="bar"/>
+  <rect x="1046" y="578" width="120" height="14" rx="7" fill="#48647f" opacity="0.6"/>
+  <rect x="1046" y="608" width="228" height="12" rx="6" class="bar"/>
+  <rect x="1046" y="636" width="180" height="12" rx="6" class="bar"/>
+  <rect x="1046" y="664" width="228" height="12" rx="6" class="bar"/>
+  <rect x="1046" y="692" width="140" height="12" rx="6" class="bar"/>
+  <circle cx="1296" cy="790" r="34" fill="#e9b949" stroke="#102a42" stroke-width="2.5"/>
+  <path d="M1280 790 L1292 802 L1314 778" fill="none" stroke="#102a42" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- chips -->
+  <rect x="1356" y="430" width="136" height="54" rx="10" fill="#102a42"/>
+  <text x="1424" y="465" text-anchor="middle" style="font: 500 22px 'JetBrains Mono', ui-monospace, Menlo, monospace; fill: #fffaeb;">.docx</text>
+  <rect x="1356" y="504" width="136" height="54" rx="10" fill="#ffffff" stroke="#102a42" stroke-width="2.5"/>
+  <text x="1424" y="539" text-anchor="middle" style="font: 500 22px 'JetBrains Mono', ui-monospace, Menlo, monospace; fill: #102a42;">EN / 中</text>
+</svg>

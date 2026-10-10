@@ -48,5 +48,6 @@ Frontmatter fields:
 - `src/pages/` — routes: English at `/`, Chinese under `/zh/`
 - `src/i18n.ts` — shared UI strings (nav, footer, labels)
 - `src/content/writing/` — blog posts (Markdown); also the Obsidian vault
+- `src/projects/` — project pages without a public repo (Markdown, `en.md` + `zh.md`), routed from `src/pages/projects/`; their images live in `public/assets/projects/`
 - `src/styles/global.css` — all styles; light and dark palette variables at the top
 - `.github/workflows/deploy.yml` — build + deploy on push to `main`
