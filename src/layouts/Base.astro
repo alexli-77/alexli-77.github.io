@@ -71,19 +71,6 @@ const fonts =
     <link href={fonts} rel="stylesheet" />
   </head>
   <body>
-    <div class="issue-bar">
-      <div class="wrap">
-        <span>{t.issue}</span>
-        <div class="controls">
-          <span class="place">{t.place}</span>
-          <a href={alternate} hreflang={t.switchHreflang} lang={t.switchHreflang}>{t.switchLabel}</a>
-          <button class="theme-toggle" type="button" data-theme-toggle aria-label={t.themeAria}>
-            <span class="to-dark">◐ {t.toDark}</span><span class="to-light">◑ {t.toLight}</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
     <header class="masthead">
       <div class="wrap">
         <a class="logo" href={home}>Lé<em>o</em>n</a>
@@ -93,6 +80,13 @@ const fonts =
           <a href={localize(lang, '/writing/')}>{t.nav.writing}</a>
           <a href={localize(lang, '/contact/')}>{t.nav.contact}</a>
         </nav>
+        <div class="controls">
+          <span class="place">{t.place}</span>
+          <a href={alternate} hreflang={t.switchHreflang} lang={t.switchHreflang}>{t.switchLabel}</a>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label={t.themeAria}>
+            <span class="to-dark">◐ {t.toDark}</span><span class="to-light">◑ {t.toLight}</span>
+          </button>
+        </div>
       </div>
     </header>
 

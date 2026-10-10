@@ -102,9 +102,9 @@ Inside `.prose`, a `>` blockquote becomes a pull quote, `---` becomes a `◆ ◆
 
 ```html
 <ul class="reach">
-  <li><svg …/><a class="spaced" href="mailto:…">name@example.com</a><button class="copy-btn" …>Copy</button></li>
+  <li><svg …/><button class="spaced" data-copy="name@example.com">name@example.com</button><span class="copied" data-copied="Copied"></span></li>
 </ul>
 <ul class="socials"><li><a href="…" aria-label="GitHub"><svg …/></a></li></ul>
 ```
 
-Brand icon paths live in `src/icons.ts` (inline SVG, `currentColor`). The contact page is the only place icons are used.
+Clicking the email copies it. Brand icon paths live in `src/icons.ts` (inline SVG, `currentColor`); links are set in `src/profile.ts`. The contact page is the only place icons are used.

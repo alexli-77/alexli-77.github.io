@@ -23,7 +23,6 @@ export const ui = {
     siteTitle: 'Léon — Issue Nº 01',
     description:
       'Yang (Léon) Li — Ph.D. candidate at Université de Montréal researching the trajectories, energy use, and observability of AI agents. Projects and writing.',
-    issue: 'ISSUE Nº 01 — AUTUMN 2026',
     place: 'MONTRÉAL, QC',
     switchLabel: '中文',
     switchHreflang: 'zh-CN',
@@ -51,7 +50,6 @@ export const ui = {
     siteTitle: 'Léon — 第 01 期',
     description:
       'Yang (Léon) Li — 蒙特利尔大学计算机博士候选人，研究 AI Agent 的运行轨迹、能耗与可观测性验证。项目与写作。',
-    issue: '第 01 期 — 2026 秋',
     place: '蒙特利尔',
     switchLabel: 'EN',
     switchHreflang: 'en',
