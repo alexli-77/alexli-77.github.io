@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { alternatePath, getLang, localize, ui } from '../i18n';
 
 interface Props {
   title?: string;
@@ -8,32 +9,52 @@ interface Props {
   publishedTime?: Date;
 }
 
-const {
-  title = 'Léon — Issue Nº 01',
-  description = 'Yang (Léon) Li — Ph.D. student at Université de Montréal working on LLM-based test generation. Projects and writing.',
-  type = 'website',
-  publishedTime,
-} = Astro.props;
+const lang = getLang(Astro.url);
+const t = ui[lang];
+
+const { title = t.siteTitle, description = t.description, type = 'website', publishedTime } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const alternate = alternatePath(Astro.url);
+const enUrl = new URL(lang === 'en' ? Astro.url.pathname : alternate, Astro.site);
+const zhUrl = new URL(lang === 'zh' ? Astro.url.pathname : alternate, Astro.site);
 const ogImage = new URL('/og.png', Astro.site);
+const home = localize(lang, '/');
+
+const fonts =
+  'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500' +
+  (lang === 'zh' ? '&family=Noto+Serif+SC:wght@400;600' : '') +
+  '&display=swap';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={t.htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="google-site-verification" content="YkAsoVEnp7x5rxya_pqc-Q3lLw7vWPfynqsmlrqH4fg" />
+    <meta name="color-scheme" content="light dark" />
+    <script is:inline>
+      // Set the theme before first paint so there's no flash of the wrong colors.
+      (() => {
+        const saved = localStorage.getItem('theme');
+        const dark = saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      })();
+    </script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title}</title>
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="zh-CN" href={zhUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="application/rss+xml" title="Léon — Writing" href="/rss.xml" />
 
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content="Léon" />
+    <meta property="og:locale" content={t.ogLocale} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -47,26 +68,30 @@ const ogImage = new URL('/og.png', Astro.site);
     <meta name="twitter:image" content={ogImage} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <link href={fonts} rel="stylesheet" />
   </head>
   <body>
     <div class="issue-bar">
       <div class="wrap">
-        <span>ISSUE Nº 01 — AUTUMN 2026</span>
-        <span>MONTRÉAL, QC</span>
+        <span>{t.issue}</span>
+        <div class="controls">
+          <span class="place">{t.place}</span>
+          <a href={alternate} hreflang={t.switchHreflang} lang={t.switchHreflang}>{t.switchLabel}</a>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label={t.themeAria}>
+            <span class="to-dark">◐ {t.toDark}</span><span class="to-light">◑ {t.toLight}</span>
+          </button>
+        </div>
       </div>
     </div>
 
     <header class="masthead">
       <div class="wrap">
-        <a class="logo" href="/">Lé<em>o</em>n</a>
+        <a class="logo" href={home}>Lé<em>o</em>n</a>
         <nav aria-label="Main navigation">
-          <a href="/#about">About</a>
-          <a href="/#projects">Projects</a>
-          <a href="/writing/">Writing</a>
+          <a href={`${home}#about`}>{t.nav.about}</a>
+          <a href={`${home}#projects`}>{t.nav.projects}</a>
+          <a href={localize(lang, '/writing/')}>{t.nav.writing}</a>
+          <a href={localize(lang, '/contact/')}>{t.nav.contact}</a>
           <a href="https://github.com/alexli-77" target="_blank" rel="noopener">GitHub ↗</a>
         </nav>
       </div>
@@ -78,12 +103,20 @@ const ogImage = new URL('/og.png', Astro.site);
 
     <footer>
       <div class="wrap">
-        <span>Colophon — set in Fraunces, Inter &amp; JetBrains Mono.</span>
+        <span>{t.colophon}</span>
         <span>
           <a href="https://github.com/alexli-77" target="_blank" rel="noopener">GitHub</a> ·
-          <a href="mailto:yang.li.9@umontreal.ca">Email</a> · © 2026 Léon
+          <a href="mailto:yang.li.9@umontreal.ca">{t.email}</a> · © 2026 Léon
         </span>
       </div>
     </footer>
+
+    <script>
+      document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem('theme', next);
+      });
+    </script>
   </body>
 </html>

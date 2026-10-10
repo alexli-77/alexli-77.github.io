@@ -1,19 +1,5 @@
 ---
-import Base from '../../layouts/Base.astro';
-import PostList from '../../components/PostList.astro';
-import { getPosts } from '../../lib/posts';
-
-const posts = await getPosts();
+import WritingIndex from '../../views/WritingIndex.astro';
 ---
 
-<Base title="Writing — Léon">
-  <section class="writing page">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Writing <span>— notes &amp; essays</span></h2>
-        <span class="kicker">{String(posts.length).padStart(2, '0')} entries</span>
-      </div>
-      <PostList posts={posts} />
-    </div>
-  </section>
-</Base>
+<WritingIndex lang="en" />

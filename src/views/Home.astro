@@ -1,0 +1,206 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { localize, ui, type Lang } from '../i18n';
+import { getPosts } from '../lib/posts';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const posts = (await getPosts()).slice(0, 3);
+const contact = localize(lang, '/contact/');
+
+const copy = {
+  en: {
+    coverKicker: 'Cover Story · About',
+    glanceKicker: 'At a glance',
+    glance: [
+      ['Now', 'Ph.D. candidate, Université de Montréal'],
+      ['Also', 'Research intern, Polytechnique Montréal'],
+      ['Focus', 'AI agent observability & energy'],
+      ['Before', 'Senior backend engineer · 7+ years'],
+    ],
+    cta: 'Contact →',
+    projectsTitle: 'Projects',
+    projectsSub: '— selected work',
+    entries: 'entries',
+    leadKicker: 'Lead feature · Research',
+    viewRepo: 'View repository',
+    lead: {
+      name: 'Runtime2Test: turning live Java objects into replayable tests',
+      summary:
+        'Captures real runtime object behavior and converts it into test code by combining ProDJ-style serialization with LLM generation.',
+    },
+    projects: {
+      KDS: ['Systems', 'A policy-based dynamic scheduler for Kubernetes that rebalances stateful and stateless workloads safely.'],
+      'UniMap Condor': ['Tool', 'An interactive university map combining rankings, research metrics, and advisor discovery.'],
+      'Daily OS': ['Agent', 'A Mac-first workflow agent that gathers signals, plans the day, and reports back to Feishu.'],
+      Kestrel: ['Reliability', 'A small reliability companion that detects missed scheduled jobs and catches them up safely.'],
+      'Knowledge Base Template': ['Skill', 'An Obsidian + Claude Code knowledge base with PARA routing and low-friction capture.'],
+      'Skills for Self-Management': ['Skill', 'Agent skills inspired by the 7 Habits for auditing plans, schedules, and blind spots.'],
+    },
+  },
+  zh: {
+    coverKicker: '封面故事 · 关于',
+    glanceKicker: '速览',
+    glance: [
+      ['现在', '蒙特利尔大学 博士候选人'],
+      ['同时', 'Polytechnique Montréal 研究实习'],
+      ['方向', 'AI Agent 可观测性与能耗'],
+      ['之前', '资深后端工程师 · 7 年+'],
+    ],
+    cta: '联系我 →',
+    projectsTitle: '项目',
+    projectsSub: '— 精选作品',
+    entries: '个',
+    leadKicker: '头条 · 研究',
+    viewRepo: '查看仓库',
+    lead: {
+      name: 'Runtime2Test：把运行中的 Java 对象变成可回放的测试',
+      summary: '捕获真实的运行时对象行为，结合 ProDJ 式序列化与 LLM 生成，将其转换为测试代码。',
+    },
+    projects: {
+      KDS: ['系统', '面向 Kubernetes 的策略式动态调度器，为有状态与无状态负载安全地做再平衡。'],
+      'UniMap Condor': ['工具', '交互式大学地图，整合排名、科研指标与导师发现。'],
+      'Daily OS': ['Agent', 'Mac 优先的工作流 Agent：汇集信号、规划每一天，并把结果发回飞书。'],
+      Kestrel: ['可靠性', '一个小型可靠性助手，检测漏跑的定时任务并安全补跑。'],
+      'Knowledge Base Template': ['技能', '基于 Obsidian + Claude Code 的知识库模板，PARA 路由，低摩擦记录。'],
+      'Skills for Self-Management': ['技能', '受《高效能人士的七个习惯》启发的 Agent 技能，用于审视计划、日程与盲点。'],
+    },
+  },
+}[lang];
+
+const projects = [
+  { name: 'KDS', repo: 'KDS', image: 'kds', tags: 'Go · Kubernetes' },
+  { name: 'UniMap Condor', repo: 'unimap-condor', image: 'unimap-condor', tags: 'React · MapLibre · OpenAlex' },
+  { name: 'Daily OS', repo: 'daily-os-feishu', image: 'daily-os-feishu', tags: 'TypeScript · Swift · Agent' },
+  { name: 'Kestrel', repo: 'kestrel', image: 'kestrel', tags: 'JavaScript · Automation' },
+  { name: 'Knowledge Base Template', repo: 'Leon-knowledgeBase-template', image: 'leon-knowledgebase-template', tags: 'Obsidian · Claude Code' },
+  { name: 'Skills for Self-Management', repo: 'skills-self-management', image: 'skills-self-management', tags: 'Agent Skills · Planning' },
+] as const;
+---
+
+<Base>
+  <!-- Cover story: introduction -->
+  <section class="cover" id="about">
+    <div class="wrap">
+      <div class="cover-head">
+        <span class="kicker">{copy.coverKicker}</span>
+        {
+          lang === 'en' ? (
+            <h1>
+              Research-minded <em>engineer.</em> <span class="highlight">Systems-minded</span> <em>researcher.</em>
+            </h1>
+          ) : (
+            <h1>
+              带着研究眼光的<em>工程师</em>，<br /><span class="highlight">带着系统思维</span>的<em>研究者</em>。
+            </h1>
+          )
+        }
+      </div>
+
+      {
+        lang === 'en' ? (
+          <div class="lede">
+            <p>
+              I am a Ph.D. candidate in Computer Science at the{' '}
+              <a href="https://www.umontreal.ca/en/" target="_blank" rel="noopener">Université de Montréal</a>, and a
+              research intern at Polytechnique Montréal. I study AI agents from the inside: their trajectories, their
+              energy use, and how to verify what they actually do. I'm especially drawn to observing and optimizing the
+              energy cost of agent systems end to end, so that agents become more transparent and more efficient.
+            </p>
+            <p>
+              Before the Ph.D., I spent more than seven years as a senior backend engineer, designing the architecture of
+              cloud search services. I still think like a production engineer: what breaks, how you'd know, and what it
+              costs.
+            </p>
+            <p>
+              I also build AI products, and I'm open to any project idea. If you have one,{' '}
+              <a href={contact}>let's talk</a>.
+            </p>
+          </div>
+        ) : (
+          <div class="lede">
+            <p>
+              我是<a href="https://www.umontreal.ca/" target="_blank" rel="noopener">蒙特利尔大学</a>计算机专业的博士候选人，同时在
+              Polytechnique Montréal 实习。我研究 AI Agent 的运行轨迹、能耗与可观测性验证，尤其关注如何系统地观测和优化 AI Agent
+              的能耗，让 Agent 变得更透明、更高效。
+            </p>
+            <p>
+              读博之前，我做了 7 年多的资深后端开发，负责云搜索服务的架构设计。我至今保留着生产环境工程师的思维：什么会坏，怎么发现，代价多大。
+            </p>
+            <p>
+              我也是一名 AI 产品开发者，对任何项目想法都持开放态度，欢迎随时<a href={contact}>找我聊聊</a>。
+            </p>
+          </div>
+        )
+      }
+
+      <aside class="glance" aria-label={copy.glanceKicker}>
+        <span class="kicker">{copy.glanceKicker}</span>
+        <dl>
+          {copy.glance.map(([term, value]) => (
+            <div>
+              <dt>{term}</dt>
+              <dd>{value}</dd>
+            </div>
+          ))}
+        </dl>
+        <a class="cta" href={contact}>{copy.cta}</a>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Features: projects -->
+  <section class="projects" id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>{copy.projectsTitle} <span>{copy.projectsSub}</span></h2>
+        <span class="kicker">{String(projects.length + 1).padStart(2, '0')} {copy.entries}</span>
+      </div>
+
+      <a class="lead-feature" href="https://github.com/alexli-77/Runtime2Test" target="_blank" rel="noopener">
+        <div class="frame"><img src="/assets/github/runtime2test.png" alt="Runtime2Test banner" /></div>
+        <div>
+          <span class="kicker">{copy.leadKicker}</span>
+          <h3>{copy.lead.name}</h3>
+          <p>{copy.lead.summary}</p>
+          <div class="tags">Java · LLM · Software Testing</div>
+          <span class="read-more">{copy.viewRepo}</span>
+        </div>
+      </a>
+
+      <div class="project-grid">
+        {projects.map((p, i) => {
+          const [kind, summary] = copy.projects[p.name];
+          return (
+            <a class="card" href={`https://github.com/alexli-77/${p.repo}`} target="_blank" rel="noopener">
+              <div class="frame">
+                <img src={`/assets/github/${p.image}.png`} alt={`${p.name} banner`} loading="lazy" />
+              </div>
+              <span class="num">{String(i + 2).padStart(2, '0')} — {kind}</span>
+              <h3>{p.name}</h3>
+              <p>{summary}</p>
+              <div class="tags">{p.tags}</div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- Writing: latest three posts from src/content/writing -->
+  <section class="writing" id="writing">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>{t.writingTitle} <span>{t.writingSub}</span></h2>
+        <span class="kicker">{t.writingKicker}</span>
+      </div>
+      <PostList posts={posts} lang={lang} />
+      <a class="all-posts" href={localize(lang, '/writing/')}>{t.allWriting}</a>
+    </div>
+  </section>
+</Base>

@@ -44,7 +44,9 @@ Frontmatter fields:
 
 ## Where things live
 
-- `src/pages/index.astro` — about, projects, latest writing
+- `src/views/` — page content in both languages (`Home`, `Contact`, `WritingIndex`, `Article`)
+- `src/pages/` — routes: English at `/`, Chinese under `/zh/`
+- `src/i18n.ts` — shared UI strings (nav, footer, labels)
 - `src/content/writing/` — blog posts (Markdown); also the Obsidian vault
-- `src/styles/global.css` — all styles; palette variables at the top
+- `src/styles/global.css` — all styles; light and dark palette variables at the top
 - `.github/workflows/deploy.yml` — build + deploy on push to `main`

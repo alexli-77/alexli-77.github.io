@@ -24,7 +24,7 @@ All classes already exist in `src/styles/global.css`. Copy the markup and change
     <aside class="glance">
       <span class="kicker">At a glance</span>
       <dl><div><dt>Now</dt><dd>Ph.D., Université de Montréal</dd></div></dl>
-      <a class="cta" href="…">Read the notes →</a>
+      <a class="cta" href="/contact/">Contact →</a>
     </aside>
   </div>
 </section>
@@ -97,3 +97,24 @@ Dates are `YYYY · MM · DD` in mono. An empty list uses `<p class="empty">…</
 ```
 
 Inside `.prose`, a `>` blockquote becomes a pull quote, `---` becomes a `◆ ◆ ◆` break, and the first paragraph gets the drop cap automatically.
+
+## Contact list (label · big serif value · action)
+
+```html
+<dl class="contact-list">
+  <div>
+    <dt>Email</dt>
+    <dd><a href="mailto:…">name@example.com</a></dd>
+    <button class="copy-btn" type="button" data-copy="name@example.com" data-done="Copied">Copy</button>
+  </div>
+</dl>
+```
+
+## Numbered list in a sidebar
+
+```html
+<aside class="glance">
+  <span class="kicker">Good reasons to write</span>
+  <ol class="topics"><li>One line per item</li></ol>
+</aside>
+```

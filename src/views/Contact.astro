@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import { type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const EMAIL = 'yang.li.9@umontreal.ca';
+
+const copy = {
+  en: {
+    title: 'Contact — Léon',
+    description: 'Get in touch with Yang (Léon) Li about AI agent research, AI product ideas, or backend systems.',
+    kicker: 'Correspondence · Contact',
+    lede: [
+      "Whether it's research on AI agent observability and energy, an AI product idea at any stage, or a question about backend and search systems, I'd be glad to hear from you.",
+      'The quickest way to reach me is email.',
+    ],
+    email: 'Email',
+    copy: 'Copy',
+    copied: 'Copied',
+    topicsKicker: 'Good reasons to write',
+    topics: [
+      'Research on AI agent trajectories, energy, and observability',
+      'AI product ideas, at any stage',
+      'Backend and cloud search architecture',
+      'Collaborations, or just saying hello',
+    ],
+  },
+  zh: {
+    title: '联系 — Léon',
+    description: '联系 Yang (Léon) Li：AI Agent 研究、AI 产品想法或后端系统相关的话题。',
+    kicker: '来信 · 联系',
+    lede: [
+      '无论是 AI Agent 可观测性与能耗方面的研究，处在任何阶段的 AI 产品想法，还是后端与搜索系统的问题，都欢迎来信。',
+      '最快的联系方式是邮件。',
+    ],
+    email: '邮箱',
+    copy: '复制',
+    copied: '已复制',
+    topicsKicker: '适合聊的话题',
+    topics: ['AI Agent 轨迹、能耗与可观测性研究', '任何阶段的 AI 产品想法', '后端与云搜索架构', '合作，或者只是打个招呼'],
+  },
+}[lang];
+---
+
+<Base title={copy.title} description={copy.description}>
+  <section class="cover contact">
+    <div class="wrap">
+      <div class="cover-head">
+        <span class="kicker">{copy.kicker}</span>
+        {lang === 'en' ? <h1>Have an idea? <em>Let's talk.</em></h1> : <h1>有想法？<em>一起聊聊。</em></h1>}
+      </div>
+
+      <div class="lede">
+        {copy.lede.map((p) => <p>{p}</p>)}
+
+        <dl class="contact-list">
+          <div>
+            <dt>{copy.email}</dt>
+            <dd><a href={`mailto:${EMAIL}`}>{EMAIL}</a></dd>
+            <button class="copy-btn" type="button" data-copy={EMAIL} data-done={copy.copied}>{copy.copy}</button>
+          </div>
+          <div>
+            <dt>GitHub</dt>
+            <dd><a href="https://github.com/alexli-77" target="_blank" rel="noopener">github.com/alexli-77 ↗</a></dd>
+          </div>
+        </dl>
+      </div>
+
+      <aside class="glance" aria-label={copy.topicsKicker}>
+        <span class="kicker">{copy.topicsKicker}</span>
+        <ol class="topics">
+          {copy.topics.map((topic) => <li>{topic}</li>)}
+        </ol>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((button) => {
+    const label = button.textContent;
+    button.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(button.dataset.copy ?? '');
+      button.textContent = button.dataset.done ?? label;
+      setTimeout(() => (button.textContent = label), 1600);
+    });
+  });
+</script>
