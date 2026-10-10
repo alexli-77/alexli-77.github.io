@@ -1,29 +1,32 @@
 ---
+import { localize, ui, type Lang } from '../i18n';
 import { formatDate, readingTime, type Post } from '../lib/posts';
 
 interface Props {
   posts: Post[];
+  lang: Lang;
 }
 
-const { posts } = Astro.props;
+const { posts, lang } = Astro.props;
+const t = ui[lang];
 ---
 
 {
   posts.length === 0 ? (
-    <p class="empty">The first notes are being written. Check back soon.</p>
+    <p class="empty">{t.empty}</p>
   ) : (
     posts.map((post) => (
-      <a class="post" href={`/writing/${post.id}/`}>
+      <a class="post" href={localize(lang, `/writing/${post.id}/`)}>
         <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
         <div>
           <h3>
             {post.data.title}
-            {post.data.draft && <span class="draft-badge">DRAFT</span>}
+            {post.data.draft && <span class="draft-badge">{t.draft.toUpperCase()}</span>}
           </h3>
           <p>{post.data.dek}</p>
         </div>
         <span class="meta">
-          {readingTime(post)} · {post.data.kind}
+          {t.minutes(readingTime(post))} · {t.kinds[post.data.kind]}
         </span>
       </a>
     ))

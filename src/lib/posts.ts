@@ -13,7 +13,10 @@ export function formatDate(date: Date) {
   return `${date.getUTCFullYear()} · ${pad(date.getUTCMonth() + 1)} · ${pad(date.getUTCDate())}`;
 }
 
+/** Minutes to read. Counts CJK characters at ~400/min and other words at ~220/min. */
 export function readingTime(post: Post) {
-  const words = (post.body ?? '').split(/\s+/).filter(Boolean).length;
-  return `${Math.max(1, Math.round(words / 220))} min`;
+  const body = post.body ?? '';
+  const cjk = (body.match(/[\u3400-\u9fff]/g) ?? []).length;
+  const words = body.replace(/[\u3400-\u9fff]/g, ' ').split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(words / 220 + cjk / 400));
 }

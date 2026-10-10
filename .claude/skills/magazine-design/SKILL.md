@@ -22,7 +22,11 @@ Source of truth: `src/styles/global.css`. Reuse its classes before writing new C
 | `--mustard-ink` | `#7a5c10` | kickers and italic accents on cream (passes contrast) |
 | `--rule` | `#dae2ec` | hairline dividers |
 
-On the navy band: headings `--paper`, body `#bcccdc`, meta `#829ab0`, accents `--mustard`.
+Semantic tokens: `--ink` (headings, heavy rules, strong text) and `--band` (background of the one dark band). Use these, not `--navy`, so dark mode works. Keep literal `--navy` only for text sitting on a mustard fill (`.cta`, `.draft-badge`).
+
+Dark mode (`:root[data-theme="dark"]`) remaps the same hues: paper `#102a42`, ink `#fffaeb`, body `#bcccdc`, muted `#9eb2c7`, rule and `--paper-2` `#243a52`, mustard-ink becomes `#e9b949`, band `#0b1e30`. Never add a color that exists in only one theme.
+
+On the navy band: headings `#fffaeb`, body `#bcccdc`, meta `#829ab0`, accents `--mustard`.
 
 Type: headlines in **Fraunces** (600, plus 400 italic for emphasis). Body in **Inter** 17px/1.65. All meta (kickers, dates, tags, counts) in **JetBrains Mono** 12px, uppercase, letter-spacing 0.06–0.12em.
 
@@ -37,19 +41,23 @@ Layout: `.wrap` caps width at 1200px with a fluid `--gutter`. The cover uses a 1
 5. **One drop cap per page**, on the first paragraph of the lede or the article.
 6. **Rhythm alternates cream → navy band → cream.** At most one navy band per page.
 7. **Links** are navy with a 2px mustard bottom border. On hover, swap to a navy border or a mustard text color. Never default blue underlines.
-8. **Motion is minimal**: 0.2s color/border transitions and a 1.03 image scale on hover. Nothing loops or bounces.
+8. **Motion is minimal**: 0.2s color/border transitions and a 1.03 image scale on hover. Nothing loops or bounces, except the hero's Contact me drawer, which the user asked to pop open with a jelly effect.
+
+## Two languages
+
+Every page exists at `/` (English) and `/zh/` (Chinese). Route files in `src/pages/` are thin wrappers that pass `lang` to a view in `src/views/`. Shared chrome strings live in `src/i18n.ts`. Page-specific copy sits in a `copy = { en, zh }[lang]` object at the top of each view. Chinese turns off italics and negative tracking automatically (`:lang(zh)` in global.css). Break Chinese headlines with an explicit `<br />` at the comma.
 
 ## Don't
 
 - Pixel, retro, or 8-bit elements. They were tried and rejected as clashing with the editorial tone.
-- Emoji, gradients (other than the `.highlight` underline), glassmorphism, or icon libraries.
+- Emoji, gradients (other than the `.highlight` underline), glassmorphism, or icon libraries. The one exception is the brand icons on the contact page (`src/icons.ts`).
 - New colors or fonts. If something seems to need one, use a tint of an existing token.
 - Mustard text smaller than 24px on cream. Use `--mustard-ink`.
 
 ## Workflow for a new page or section
 
 1. Pick the closest existing pattern in [COMPONENTS.md](COMPONENTS.md) and copy its markup.
-2. Wrap the page in `Base.astro` so the issue bar, masthead, and colophon come for free.
+2. Write the page as a view in `src/views/` taking `lang`, wrap it in `Base.astro`, and add both `src/pages/x.astro` and `src/pages/zh/x.astro`.
 3. Add CSS only for what's missing, in `global.css` next to the related block, using tokens only.
-4. Check at 1440px and 390px: no horizontal overflow, and the section head still reads cleanly.
+4. Check at 1440px and 390px, in both languages and both themes: no horizontal overflow, and the section head still reads cleanly.
 5. Run `npm run build` and confirm it's clean.

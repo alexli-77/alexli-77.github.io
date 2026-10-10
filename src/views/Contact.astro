@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+import Socials from '../components/Socials.astro';
+import { type Lang } from '../i18n';
+import { brandIcons } from '../icons';
+import { EMAIL, WHATSAPP } from '../profile';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const copy = {
+  en: {
+    title: 'Contact — Léon',
+    description: 'Get in touch with Yang (Léon) Li.',
+    kicker: 'Correspondence · Contact',
+    heading: 'Contact',
+    intro: "Let's get to know each other, or just drop me a line.",
+    message: 'If you are looking to get a hold of me, you can drop me a message:',
+    social: 'You can also reach out to me on any social media below.',
+    copyHint: 'Click to copy',
+    copied: 'Copied',
+  },
+  zh: {
+    title: '联系 — Léon',
+    description: '联系 Yang (Léon) Li。',
+    kicker: '来信 · 联系',
+    heading: '联系',
+    intro: '认识一下吧，或者随时给我留言。',
+    message: '如果你想联系我，可以直接给我发消息：',
+    social: '你也可以通过下面的社交媒体找到我。',
+    copyHint: '点击复制',
+    copied: '已复制',
+  },
+}[lang];
+---
+
+<Base title={copy.title} description={copy.description}>
+  <section class="contact">
+    <div class="wrap">
+      <div class="contact-head">
+        <span class="kicker">{copy.kicker}</span>
+        <h1>{copy.heading}</h1>
+      </div>
+
+      <div class="contact-body">
+        <p>{copy.intro}</p>
+        <p>{copy.message}</p>
+
+        <ul class="reach">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="2.5" y="5" width="19" height="14" rx="1" />
+              <path d="m3 6 9 7 9-7" />
+            </svg>
+            <button class="spaced" type="button" data-copy={EMAIL} title={copy.copyHint}>{EMAIL}</button>
+            <span class="copied" data-copied={copy.copied} aria-live="polite"></span>
+          </li>
+          {
+            WHATSAPP && (
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d={brandIcons.whatsapp} />
+                </svg>
+                <a class="spaced" href={`https://wa.me/${WHATSAPP.replace(/\D/g, '')}`} target="_blank" rel="noopener">
+                  {WHATSAPP}
+                </a>
+              </li>
+            )
+          }
+        </ul>
+
+        <p>{copy.social}</p>
+        <Socials />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Clicking the email copies it and shows a short "Copied" note next to it.
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((button) => {
+    const note = button.nextElementSibling as HTMLElement | null;
+    button.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(button.dataset.copy ?? '');
+      if (!note) return;
+      note.textContent = note.dataset.copied ?? '';
+      setTimeout(() => (note.textContent = ''), 1600);
+    });
+  });
+</script>

@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Two-layer proxy routing: stateless route proxy replicas pick version and cluster, sink proxies in each of 4 clusters run the business logic">
+  <style>
+    .t { font: 600 15px Inter, -apple-system, "Helvetica Neue", Arial, sans-serif; fill: #102a42; }
+    .s { font: 400 12px Inter, -apple-system, "Helvetica Neue", Arial, sans-serif; fill: #48647f; }
+    .b { font: 400 13px Inter, -apple-system, "Helvetica Neue", Arial, sans-serif; fill: #48647f; }
+    .k { font: 500 11px "JetBrains Mono", ui-monospace, Menlo, monospace; letter-spacing: 0.12em; fill: #7a5c10; }
+    .m { font: 400 12px "JetBrains Mono", ui-monospace, Menlo, monospace; fill: #102a42; }
+    .ms { font: 400 11px "JetBrains Mono", ui-monospace, Menlo, monospace; fill: #617d98; }
+    .h1 { font: 600 24px Fraunces, Georgia, serif; fill: #102a42; }
+    .box { fill: #ffffff; stroke: #102a42; stroke-width: 1.2; }
+    .hot { fill: #fceec5; stroke: #102a42; stroke-width: 1.2; }
+    .clu { fill: #fffdf5; stroke: #617d98; stroke-width: 1.2; stroke-dasharray: 5 4; }
+    .q { fill: none; stroke: #c8961e; }
+    .c { fill: none; stroke: #617d98; stroke-width: 1.4; stroke-dasharray: 5 4; }
+  </style>
+  <defs>
+    <marker id="aq" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c8961e"/></marker>
+    <marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#617d98"/></marker>
+  </defs>
+
+  <rect width="1200" height="630" fill="#fffaeb"/>
+  <text x="40" y="48" class="h1">Two-layer proxy: distribution vs. business logic</text>
+
+  <!-- caller -->
+  <rect x="40" y="275" width="170" height="80" rx="8" class="box"/>
+  <text x="56" y="301" class="t">Business service</text>
+  <text x="56" y="321" class="s">wcs-agent SDK</text>
+  <text x="56" y="341" class="ms">appId = A</text>
+  <line x1="210" y1="315" x2="278" y2="315" class="q" stroke-width="2.2" marker-end="url(#aq)"/>
+
+  <!-- config source -->
+  <rect x="280" y="80" width="260" height="40" rx="8" fill="none" stroke="#617d98" stroke-dasharray="5 4"/>
+  <text x="296" y="105" class="s">wcs-manager → config center</text>
+  <line x1="410" y1="120" x2="410" y2="140" class="c" marker-end="url(#ac)"/>
+
+  <!-- route proxy: stacked to show stateless replicas -->
+  <rect x="290" y="152" width="260" height="388" rx="8" class="hot" opacity="0.45"/>
+  <rect x="285" y="147" width="260" height="388" rx="8" class="hot" opacity="0.7"/>
+  <rect x="280" y="142" width="260" height="388" rx="8" class="hot"/>
+  <text x="298" y="170" class="t">route proxy × N replicas</text>
+  <text x="298" y="190" class="s">stateless · runs in any of the 4 clusters</text>
+  <text x="298" y="208" class="s">distribution only, no business logic</text>
+  <text x="298" y="244" class="m" font-weight="600">app A</text>
+  <text x="314" y="266" class="m" xml:space="preserve">v12  cluster 1  w=90</text>
+  <text x="314" y="288" class="m" xml:space="preserve">v13  cluster 2  w=10 gray</text>
+  <text x="298" y="322" class="m" font-weight="600">app B</text>
+  <text x="314" y="344" class="m" xml:space="preserve">v7   cluster 3  w=100</text>
+  <text x="298" y="378" class="m" font-weight="600">app F</text>
+  <text x="314" y="400" class="m" xml:space="preserve">v3   cluster 4  w=100</text>
+  <line x1="298" y1="414" x2="522" y2="414" stroke="#e9b949" stroke-width="1"/>
+  <text x="298" y="432" class="ms" style="fill:#7a5c10">vN = index version of the app,</text>
+  <text x="298" y="448" class="ms" style="fill:#7a5c10">one per schema change or rebuild</text>
+  <text x="298" y="478" class="s">weighted random pick per request</text>
+  <text x="298" y="496" class="s">route table hot-reloaded from</text>
+  <text x="298" y="514" class="s">the config center, no restart</text>
+
+  <!-- 4 clusters -->
+  <g>
+    <rect x="620" y="100" width="540" height="90" rx="10" class="clu"/>
+    <text x="636" y="119" class="k">CLUSTER 1</text>
+    <rect x="636" y="128" width="170" height="52" rx="6" class="box"/>
+    <text x="650" y="149" class="t">sink proxies</text><text x="650" y="167" class="s">query · index</text>
+    <line x1="806" y1="154" x2="838" y2="154" stroke="#102a42" stroke-width="1.2" marker-end="url(#ac)"/>
+    <rect x="840" y="128" width="160" height="52" rx="6" class="box"/>
+    <text x="854" y="149" class="t">merger + shards</text><text x="854" y="167" class="s">Kafka + builders</text>
+    <text x="1016" y="149" class="ms">A · v12</text><text x="1016" y="167" class="ms">C · v4</text>
+  </g>
+  <g>
+    <rect x="620" y="204" width="540" height="90" rx="10" class="clu"/>
+    <text x="636" y="223" class="k">CLUSTER 2</text>
+    <rect x="636" y="232" width="170" height="52" rx="6" class="box"/>
+    <text x="650" y="253" class="t">sink proxies</text><text x="650" y="271" class="s">query · index</text>
+    <line x1="806" y1="258" x2="838" y2="258" stroke="#102a42" stroke-width="1.2" marker-end="url(#ac)"/>
+    <rect x="840" y="232" width="160" height="52" rx="6" class="box"/>
+    <text x="854" y="253" class="t">merger + shards</text><text x="854" y="271" class="s">Kafka + builders</text>
+    <text x="1016" y="253" class="ms">A · v13 (gray)</text><text x="1016" y="271" class="ms">D · v2</text>
+  </g>
+  <g>
+    <rect x="620" y="308" width="540" height="90" rx="10" class="clu"/>
+    <text x="636" y="327" class="k">CLUSTER 3</text>
+    <rect x="636" y="336" width="170" height="52" rx="6" class="box"/>
+    <text x="650" y="357" class="t">sink proxies</text><text x="650" y="375" class="s">query · index</text>
+    <line x1="806" y1="362" x2="838" y2="362" stroke="#102a42" stroke-width="1.2" marker-end="url(#ac)"/>
+    <rect x="840" y="336" width="160" height="52" rx="6" class="box"/>
+    <text x="854" y="357" class="t">merger + shards</text><text x="854" y="375" class="s">Kafka + builders</text>
+    <text x="1016" y="357" class="ms">B · v7</text><text x="1016" y="375" class="ms">E · v9</text>
+  </g>
+  <g>
+    <rect x="620" y="412" width="540" height="90" rx="10" class="clu"/>
+    <text x="636" y="431" class="k">CLUSTER 4</text>
+    <rect x="636" y="440" width="170" height="52" rx="6" class="box"/>
+    <text x="650" y="461" class="t">sink proxies</text><text x="650" y="479" class="s">query · index</text>
+    <line x1="806" y1="466" x2="838" y2="466" stroke="#102a42" stroke-width="1.2" marker-end="url(#ac)"/>
+    <rect x="840" y="440" width="160" height="52" rx="6" class="box"/>
+    <text x="854" y="461" class="t">merger + shards</text><text x="854" y="479" class="s">Kafka + builders</text>
+    <text x="1016" y="461" class="ms">F · v3</text><text x="1016" y="479" class="ms">G · v5</text>
+  </g>
+
+  <!-- route edges: width = traffic share -->
+  <path d="M550 262 L634 156" class="q" stroke-width="4" marker-end="url(#aq)"/>
+  <text x="592" y="232" class="s" font-weight="600">90%</text>
+  <path d="M550 284 L634 260" class="q" stroke-width="1.6" marker-end="url(#aq)"/>
+  <text x="580" y="302" class="s" font-weight="600">10%</text>
+  <path d="M550 340 L634 364" stroke="#617d98" stroke-width="2" fill="none" marker-end="url(#ac)"/>
+  <text x="566" y="368" class="s">app B</text>
+  <path d="M550 396 L634 468" stroke="#617d98" stroke-width="2" fill="none" marker-end="url(#ac)"/>
+  <text x="560" y="452" class="s">app F</text>
+
+  <!-- caption -->
+  <text x="40" y="560" class="b">Route proxy owns distribution: app → version → cluster. It is stateless, so its replicas can run in any cluster and scale on their own.</text>
+  <text x="40" y="584" class="b">Sink proxies own business logic (query parsing, schema checks, writes) and live inside their cluster.</text>
+  <text x="40" y="608" class="b">Gray release, rollback and cross-cluster migration become weight changes in the config center. Callers never change.</text>
+</svg>

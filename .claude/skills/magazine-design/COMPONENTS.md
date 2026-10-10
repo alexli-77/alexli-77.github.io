@@ -24,7 +24,7 @@ All classes already exist in `src/styles/global.css`. Copy the markup and change
     <aside class="glance">
       <span class="kicker">At a glance</span>
       <dl><div><dt>Now</dt><dd>Ph.D., Université de Montréal</dd></div></dl>
-      <a class="cta" href="…">Read the notes →</a>
+      <a class="cta" href="/contact/">Contact →</a>
     </aside>
   </div>
 </section>
@@ -97,3 +97,25 @@ Dates are `YYYY · MM · DD` in mono. An empty list uses `<p class="empty">…</
 ```
 
 Inside `.prose`, a `>` blockquote becomes a pull quote, `---` becomes a `◆ ◆ ◆` break, and the first paragraph gets the drop cap automatically.
+
+## Contact methods + social icons (contact page)
+
+```html
+<ul class="reach">
+  <li><svg …/><button class="spaced" data-copy="name@example.com">name@example.com</button><span class="copied" data-copied="Copied"></span></li>
+</ul>
+<ul class="socials"><li><a href="…" aria-label="GitHub"><svg …/></a></li></ul>
+```
+
+Clicking the email copies it. Brand icon paths live in `src/icons.ts` (inline SVG, `currentColor`); links are set in `src/profile.ts`. The contact page is the only place icons are used.
+
+## Contact me drawer (hero)
+
+```html
+<div class="cta-row" data-drawer>
+  <a class="cta" href="/contact/" aria-expanded="false" aria-controls="contact-drawer" data-drawer-toggle>Contact me</a>
+  <div class="cta-drawer" id="contact-drawer" inert><Socials email /></div>
+</div>
+```
+
+Clicking the button opens the icon drawer with a staggered jelly pop (script in `src/views/Home.astro`). Without JS the button is a plain link to the contact page. This is the one place a bouncy animation is allowed.

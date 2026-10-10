@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 950" width="1200" height="950" role="img" aria-label="WCS cloud search platform system architecture">
+  <style>
+    .t { font: 600 15px Inter, -apple-system, "Helvetica Neue", Arial, sans-serif; fill: #102a42; }
+    .t2 { font: 600 13px Inter, -apple-system, "Helvetica Neue", Arial, sans-serif; fill: #102a42; }
+    .s { font: 400 12px Inter, -apple-system, "Helvetica Neue", Arial, sans-serif; fill: #48647f; }
+    .xs { font: 400 11px Inter, -apple-system, "Helvetica Neue", Arial, sans-serif; fill: #48647f; }
+    .k { font: 500 11px "JetBrains Mono", ui-monospace, Menlo, monospace; letter-spacing: 0.12em; fill: #7a5c10; }
+    .m { font: 400 11px "JetBrains Mono", ui-monospace, Menlo, monospace; fill: #617d98; }
+    .h1 { font: 600 24px Fraunces, Georgia, serif; fill: #102a42; }
+    .box { fill: #ffffff; stroke: #102a42; stroke-width: 1.2; }
+    .hot { fill: #fceec5; stroke: #102a42; stroke-width: 1.2; }
+    .zone { fill: none; stroke: #dae2ec; stroke-width: 1.5; }
+    .clu { fill: #fffdf5; stroke: #617d98; stroke-width: 1.2; stroke-dasharray: 5 4; }
+    .q { fill: none; stroke: #c8961e; stroke-width: 2.2; }
+    .w { fill: none; stroke: #3d6a96; stroke-width: 2.2; }
+    .c { fill: none; stroke: #617d98; stroke-width: 1.4; stroke-dasharray: 5 4; }
+  </style>
+  <defs>
+    <marker id="aq" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c8961e"/></marker>
+    <marker id="aw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3d6a96"/></marker>
+    <marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#617d98"/></marker>
+  </defs>
+
+  <rect width="1200" height="950" fill="#fffaeb"/>
+
+  <!-- Title + legend -->
+  <text x="40" y="50" class="h1">WCS · 58.com Cloud Search Platform</text>
+  <text x="40" y="76" class="s">4 clusters · 396 servers · 300+ business lines · 200k+ peak QPS</text>
+  <line x1="780" y1="56" x2="810" y2="56" class="q" marker-end="url(#aq)"/><text x="818" y="60" class="s">query</text>
+  <line x1="880" y1="56" x2="910" y2="56" class="w" marker-end="url(#aw)"/><text x="918" y="60" class="s">write / index</text>
+  <line x1="1020" y1="56" x2="1050" y2="56" class="c" marker-end="url(#ac)"/><text x="1058" y="60" class="s">control</text>
+
+  <!-- ================= DATA PLANE ================= -->
+  <rect x="40" y="100" width="820" height="740" rx="10" class="zone"/>
+  <text x="56" y="124" class="k">DATA PLANE</text>
+
+  <!-- Access -->
+  <rect x="60" y="150" width="780" height="64" rx="8" class="box"/>
+  <text x="80" y="177" class="t">Business services</text>
+  <text x="80" y="197" class="s">300+ apps</text>
+  <rect x="230" y="160" width="590" height="44" rx="6" class="hot"/>
+  <text x="250" y="180" class="t2">wcs-agent SDK</text>
+  <text x="250" y="196" class="xs">Elasticsearch-style query DSL · sync / async · bulk writes · optional per-doc lock · SCF RPC</text>
+
+  <!-- Routing -->
+  <rect x="68" y="258" width="780" height="64" rx="8" class="hot" opacity="0.45"/>
+  <rect x="64" y="254" width="780" height="64" rx="8" class="hot" opacity="0.7"/>
+  <rect x="60" y="250" width="780" height="64" rx="8" class="hot"/>
+  <text x="80" y="276" class="t">route proxy</text>
+  <text x="820" y="276" class="m" text-anchor="end">stateless · N replicas · runs in any cluster</text>
+  <text x="80" y="297" class="s">appId → version → cluster · weighted gray release · shadow-traffic copy · per-app p99 metrics</text>
+
+  <line x1="300" y1="204" x2="300" y2="248" class="q" marker-end="url(#aq)"/>
+  <line x1="650" y1="204" x2="650" y2="248" class="w" marker-end="url(#aw)"/>
+
+  <!-- Cluster (stacked to show x4) -->
+  <rect x="72" y="357" width="780" height="380" rx="10" class="clu" opacity="0.45"/>
+  <rect x="66" y="351" width="780" height="380" rx="10" class="clu" opacity="0.7"/>
+  <rect x="60" y="345" width="780" height="380" rx="10" class="clu"/>
+  <text x="76" y="368" class="k">SEARCH CLUSTER × 4</text>
+
+  <line x1="250" y1="314" x2="250" y2="378" class="q" marker-end="url(#aq)"/>
+  <line x1="650" y1="314" x2="650" y2="378" class="w" marker-end="url(#aw)"/>
+
+  <rect x="80" y="380" width="340" height="78" rx="8" class="box"/>
+  <text x="100" y="404" class="t">query proxy</text>
+  <text x="100" y="424" class="s">query DSL → kernel query · segmentation</text>
+  <text x="100" y="442" class="s">query blacklist · stored fields from Wtable</text>
+
+  <rect x="480" y="380" width="340" height="78" rx="8" class="box"/>
+  <text x="500" y="404" class="t">index proxy</text>
+  <text x="500" y="424" class="s">schema check · CAS version · bulk</text>
+  <text x="500" y="442" class="s">writes Wtable, dual-writes Kafka</text>
+
+  <line x1="250" y1="458" x2="250" y2="488" class="q" marker-end="url(#aq)"/>
+  <line x1="650" y1="458" x2="650" y2="488" class="w" marker-end="url(#aw)"/>
+
+  <rect x="80" y="490" width="340" height="60" rx="8" class="box"/>
+  <text x="100" y="514" class="t">merger</text>
+  <text x="100" y="534" class="s">fan-out to shards · merge · rank</text>
+
+  <rect x="480" y="490" width="340" height="60" rx="8" class="box"/>
+  <text x="500" y="514" class="t">Kafka</text>
+  <text x="500" y="534" class="s">one topic per app · incremental updates</text>
+
+  <!-- searcher pods -->
+  <rect x="80" y="580" width="500" height="132" rx="8" fill="none" stroke="#102a42" stroke-width="1"/>
+  <g>
+    <rect x="95" y="590" width="150" height="82" rx="6" class="box"/>
+    <line x1="95" y1="630" x2="245" y2="630" stroke="#dae2ec"/>
+    <text x="107" y="607" class="t2">esearch kernel</text><text x="107" y="622" class="xs">C++ · inverted index</text>
+    <text x="107" y="649" class="t2">builder</text><text x="107" y="664" class="xs">sidecar · INST / MAIN</text>
+  </g>
+  <g>
+    <rect x="255" y="590" width="150" height="82" rx="6" class="box"/>
+    <line x1="255" y1="630" x2="405" y2="630" stroke="#dae2ec"/>
+    <text x="267" y="607" class="t2">esearch kernel</text><text x="267" y="622" class="xs">C++ · inverted index</text>
+    <text x="267" y="649" class="t2">builder</text><text x="267" y="664" class="xs">sidecar · INST / MAIN</text>
+  </g>
+  <g>
+    <rect x="415" y="590" width="150" height="82" rx="6" class="box"/>
+    <line x1="415" y1="630" x2="565" y2="630" stroke="#dae2ec"/>
+    <text x="427" y="607" class="t2">esearch kernel</text><text x="427" y="622" class="xs">C++ · inverted index</text>
+    <text x="427" y="649" class="t2">builder</text><text x="427" y="664" class="xs">sidecar · INST / MAIN</text>
+  </g>
+  <text x="95" y="699" class="m">searcher pods · N shards · murmur3(id) mod N</text>
+
+  <path d="M250 550 L170 588" class="q" marker-end="url(#aq)"/>
+  <path d="M250 550 L330 588" class="q" marker-end="url(#aq)"/>
+  <path d="M250 550 L490 588" class="q" marker-end="url(#aq)"/>
+
+  <!-- Kafka -> builder, builder <-> edoc -->
+  <path d="M600 550 V651 H567" class="w" marker-end="url(#aw)"/>
+  <text x="606" y="574" class="xs">consume</text>
+  <path d="M567 664 H618" class="w" marker-start="url(#aw)" marker-end="url(#aw)"/>
+
+  <rect x="620" y="590" width="200" height="122" rx="8" class="box"/>
+  <text x="640" y="614" class="t">edoc</text>
+  <text x="640" y="634" class="s">tokenization service</text>
+  <text x="640" y="652" class="s">in-house cutword + NLP</text>
+  <text x="640" y="670" class="s">doc → index protobuf</text>
+  <text x="640" y="688" class="s">stateless · scales out</text>
+
+  <!-- Storage -->
+  <path d="M80 440 H70 V758" class="q" marker-end="url(#aq)"/>
+  <text x="76" y="748" class="xs">read</text>
+  <path d="M820 440 H830 V758" class="w" marker-end="url(#aw)"/>
+  <text x="824" y="748" class="xs" text-anchor="end">write</text>
+  <path d="M490 760 V674" class="w" marker-end="url(#aw)"/>
+  <text x="497" y="748" class="xs">snapshot → full rebuild</text>
+
+  <rect x="60" y="760" width="780" height="60" rx="8" class="box"/>
+  <text x="90" y="785" class="t">Wtable</text>
+  <text x="90" y="805" class="s">KV document store · source of truth for every indexed document · snapshots to HDFS</text>
+
+  <!-- ================= CONTROL PLANE ================= -->
+  <rect x="880" y="100" width="280" height="740" rx="10" class="zone"/>
+  <text x="896" y="124" class="k">CONTROL PLANE</text>
+
+  <rect x="900" y="150" width="240" height="210" rx="8" class="hot"/>
+  <text x="916" y="176" class="t">wcs-manager</text>
+  <text x="916" y="194" class="m">Vue 2 · Spring Boot · fabric8</text>
+  <text x="916" y="224" class="s">app &amp; schema approval</text>
+  <text x="916" y="244" class="s">deploy · scale · gray · rollback</text>
+  <text x="916" y="264" class="s">Kafka topic &amp; Wtable allocation</text>
+  <text x="916" y="284" class="s">ranking plugins &amp; scorers</text>
+  <text x="916" y="304" class="s">full-rebuild work orders</text>
+  <text x="916" y="324" class="s">self-service query debugging</text>
+
+  <line x1="1020" y1="360" x2="1020" y2="378" class="c" marker-end="url(#ac)"/>
+
+  <rect x="900" y="380" width="240" height="110" rx="8" class="box"/>
+  <text x="916" y="404" class="t">Config distribution</text>
+  <text x="916" y="426" class="s">WConfig: routes, schema, dicts</text>
+  <text x="916" y="446" class="s">etcd: shard lists for mergers</text>
+  <text x="916" y="466" class="s">hot reload, no restart</text>
+
+  <rect x="900" y="510" width="240" height="50" rx="8" class="box"/>
+  <text x="916" y="531" class="t">MySQL</text>
+  <text x="916" y="549" class="s">apps · schema · deployments</text>
+
+  <rect x="900" y="580" width="240" height="110" rx="8" class="box"/>
+  <text x="916" y="604" class="t">Observability</text>
+  <text x="916" y="626" class="s">Micrometer → Kafka, p99.9</text>
+  <text x="916" y="646" class="s">Prometheus · ES dashboards</text>
+  <text x="916" y="666" class="s">alerts: SMS · voice · WeChat</text>
+
+  <rect x="900" y="710" width="240" height="110" rx="8" class="box"/>
+  <text x="916" y="734" class="t">Release safety</text>
+  <text x="916" y="756" class="s">traffic-copy preheat</text>
+  <text x="916" y="776" class="s">diff test before go-live</text>
+  <text x="916" y="796" class="s">approval-gated rebuilds</text>
+
+  <!-- control edges -->
+  <path d="M900 435 H870 V282 H842" class="c" marker-end="url(#ac)"/>
+  <path d="M870 410 H822" class="c" marker-end="url(#ac)"/>
+  <path d="M1140 255 H1150 V858" class="c" marker-end="url(#ac)"/>
+
+  <!-- ================= KUBERNETES ================= -->
+  <rect x="40" y="860" width="1120" height="70" rx="10" fill="#102a42"/>
+  <text x="60" y="890" style="font: 600 16px Inter, -apple-system, Arial, sans-serif; fill: #fffaeb;">Kubernetes</text>
+  <text x="60" y="912" style="font: 400 12px Inter, -apple-system, Arial, sans-serif; fill: #bcccdc;">4 clusters · 396 servers · every component above runs as Deployments / StatefulSets / Jobs · API servers behind HAProxy + keepalived</text>
+  <text x="1140" y="890" text-anchor="end" style="font: 400 11px 'JetBrains Mono', ui-monospace, Menlo, monospace; fill: #e9b949;">manager applies YAML via fabric8</text>
+</svg>

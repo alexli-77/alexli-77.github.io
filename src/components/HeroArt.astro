@@ -1,0 +1,60 @@
+---
+// Line-art infographic for the hero: measure → explain → improve, with the
+// magnifier on "explain" and energy per run dropping as the loop repeats.
+// Colors come from CSS tokens so it follows dark mode.
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const labels = {
+  en: { steps: ['measure', 'explain', 'improve'], chart: 'energy / run', aria: 'Measure, explain, improve: a loop that lowers the energy each run uses' },
+  zh: { steps: ['测量', '解释', '改进'], chart: '每次运行能耗', aria: '测量、解释、改进：每轮循环降低运行能耗' },
+}[lang];
+
+// lx/ly/anchor place each label clear of the curve.
+const steps = [
+  { x: 110, y: 110, lx: 74, ly: 74, anchor: 'start' },
+  { x: 360, y: 262, lx: 290, ly: 267, anchor: 'end' },
+  { x: 170, y: 432, lx: 136, ly: 437, anchor: 'end' },
+];
+const energy = [92, 80, 66, 50, 38];
+---
+
+<svg class="hero-art" viewBox="0 0 480 640" role="img" aria-label={labels.aria}>
+  <defs>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.4" class="art-dot" />
+    </pattern>
+  </defs>
+
+  <rect x="0" y="0" width="480" height="640" fill="url(#dots)" />
+
+  <!-- measure → explain → improve -->
+  <path class="art-line" d="M110 110 C 240 90, 360 150, 360 262 S 250 412, 170 432" />
+
+  <!-- magnifier on "explain" -->
+  <circle cx="360" cy="262" r="58" class="art-lens" />
+  <line x1="402" y1="304" x2="444" y2="346" class="art-handle" />
+
+  {
+    steps.map((s, i) => (
+      <g>
+        <circle cx={s.x} cy={s.y} r="22" class={i === 1 ? 'art-node is-active' : 'art-node'} />
+        <text x={s.x} y={s.y + 5} text-anchor="middle" class="art-num">{String(i + 1).padStart(2, '0')}</text>
+        <text x={s.lx} y={s.ly} text-anchor={s.anchor} class="art-label">{labels.steps[i]}</text>
+      </g>
+    ))
+  }
+
+  <!-- energy per run, falling as the loop repeats -->
+  <text x="24" y="540" class="art-label">{labels.chart}</text>
+  <line x1="24" y1="616" x2="456" y2="616" class="art-axis" />
+  {
+    energy.map((h, i) => (
+      <rect x={40 + i * 84} y={616 - h * 0.6} width="52" height={h * 0.6} class={i === energy.length - 1 ? 'art-bar is-active' : 'art-bar'} />
+    ))
+  }
+</svg>

@@ -1,0 +1,36 @@
+---
+// Detail page for a project with no public repo. Content is a Markdown file per language under src/projects/.
+import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
+import Base from '../layouts/Base.astro';
+import { localize, ui, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  frontmatter: { title: string; dek: string; kicker: string; meta: string[] };
+  Content: AstroComponentFactory;
+}
+
+const { lang, frontmatter, Content } = Astro.props;
+const t = ui[lang];
+---
+
+<Base title={`${frontmatter.title} — Léon`} description={frontmatter.dek} type="article">
+  <article class="article project">
+    <div class="wrap">
+      <header class="article-head">
+        <span class="kicker">{frontmatter.kicker}</span>
+        <h1>{frontmatter.title}</h1>
+        <p class="dek">{frontmatter.dek}</p>
+        <div class="article-meta">
+          {frontmatter.meta.map((m) => <span>{m}</span>)}
+        </div>
+      </header>
+
+      <div class="prose">
+        <Content />
+      </div>
+
+      <a class="back" href={localize(lang, '/#projects')}>{t.backToProjects}</a>
+    </div>
+  </article>
+</Base>
