@@ -2,7 +2,6 @@
 import Base from '../layouts/Base.astro';
 import HeroArt from '../components/HeroArt.astro';
 import PostList from '../components/PostList.astro';
-import Socials from '../components/Socials.astro';
 import { localize, ui, type Lang } from '../i18n';
 import { getPosts } from '../lib/posts';
 
@@ -74,7 +73,7 @@ const projects = [
 ---
 
 <Base>
-  <!-- Hero: greeting, intro, contact, socials; illustration on the right -->
+  <!-- Hero: greeting, intro, contact; illustration on the right -->
   <section class="hero" id="about">
     <div class="wrap">
       <div class="hero-text">
@@ -85,36 +84,26 @@ const projects = [
           lang === 'en' ? (
             <div class="lede">
               <p>
-                I am a Ph.D. candidate in Computer Science at the{' '}
-                <a href="https://www.umontreal.ca/en/" target="_blank" rel="noopener">Université de Montréal</a>, and a
-                research intern at Polytechnique Montréal. I study AI agents from the inside: their trajectories, their
-                energy use, and how to verify what they actually do. I'm especially drawn to observing and optimizing the
-                energy cost of agent systems end to end, so that agents become more transparent and more efficient.
+                I'm a Ph.D. candidate in Computer Science at Université de Montréal and a research intern at Polytechnique
+                Montréal. I study AI agents: their trajectories, their energy use, and how to verify what they do. My goal
+                is agents that are more transparent and more efficient.
               </p>
-              <p>
-                Before the Ph.D., I spent more than seven years as a senior backend engineer, designing the architecture
-                of cloud search services. I still think like a production engineer: what breaks, how you'd know, and what
-                it costs.
-              </p>
-              <p>I also build AI products, and I'm open to any project idea. Let's talk.</p>
+              <p>Before that, I spent 7+ years as a senior backend engineer, designing cloud search architecture.</p>
+              <p>I also build AI products. Have an idea? Let's talk.</p>
             </div>
           ) : (
             <div class="lede">
               <p>
-                我是<a href="https://www.umontreal.ca/" target="_blank" rel="noopener">蒙特利尔大学</a>计算机专业的博士候选人，同时在
-                Polytechnique Montréal 实习。我研究 AI Agent 的运行轨迹、能耗与可观测性验证，尤其关注如何系统地观测和优化 AI
-                Agent 的能耗，让 Agent 变得更透明、更高效。
+                我是蒙特利尔大学计算机博士候选人，也在 Polytechnique Montréal 实习。我研究 AI Agent
+                的运行轨迹、能耗与可观测性验证，目标是让 Agent 更透明、更高效。
               </p>
-              <p>
-                读博之前，我做了 7 年多的资深后端开发，负责云搜索服务的架构设计。我至今保留着生产环境工程师的思维：什么会坏，怎么发现，代价多大。
-              </p>
-              <p>我也是一名 AI 产品开发者，对任何项目想法都持开放态度，欢迎随时找我聊聊。</p>
+              <p>读博前，我做了 7 年多资深后端开发，负责云搜索服务的架构设计。</p>
+              <p>我也做 AI 产品。有想法？欢迎来聊。</p>
             </div>
           )
         }
 
         <a class="cta" href={contact}>{copy.cta}</a>
-        <Socials />
       </div>
 
       <HeroArt lang={lang} />

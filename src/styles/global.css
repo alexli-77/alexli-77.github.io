@@ -126,8 +126,6 @@ nav a:hover { border-color: var(--mustard); }
   transition: background-color 0.2s, color 0.2s;
 }
 .cta:hover { background: var(--ink); color: var(--paper); }
-.hero .socials { margin-top: 40px; gap: 36px; }
-.hero .socials svg { width: 30px; height: 30px; }
 
 .hero-art { display: block; width: 100%; max-height: 74vh; }
 .art-dot { fill: var(--rule); }
@@ -218,10 +216,15 @@ footer a { color: var(--ink); border-bottom: 1px solid var(--mustard); }
 @media (max-width: 640px) {
   body { font-size: 16px; }
   .controls .place { display: none; }
-  .masthead .wrap { flex-direction: column; align-items: flex-start; }
-  nav { gap: 20px; }
-  .hero .wrap { padding-top: 40px; padding-bottom: 56px; }
-  .hero .socials { gap: 28px; }
+  .logo { font-size: 26px; }
+  nav { gap: 16px; font-size: 14px; }
+  .hero .wrap { padding-top: 24px; padding-bottom: 48px; }
+  .hero-text::before { margin-bottom: 18px; }
+  .hero h1 { font-size: 42px; }
+  .hero-sub { margin-top: 12px; }
+  .hero .lede { margin-top: 20px; }
+  .hero .cta { margin-top: 24px; }
+  .masthead .wrap { padding-top: 12px; padding-bottom: 12px; }
   .section-head .kicker { display: none; }
   .lede { font-size: 16px; }
   .project-grid { grid-template-columns: 1fr; }
@@ -286,6 +289,7 @@ footer a { color: var(--ink); border-bottom: 1px solid var(--mustard); }
 .socials svg { display: block; width: 36px; height: 36px; }
 
 @media (max-width: 960px) {
+  .contact .wrap { grid-template-columns: 1fr; gap: 24px; }
   .contact-head, .contact-body { grid-column: 1 / -1; }
   .contact-body { padding-top: 0; }
 }
