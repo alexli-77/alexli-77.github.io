@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
+import HeroArt from '../components/HeroArt.astro';
 import PostList from '../components/PostList.astro';
+import Socials from '../components/Socials.astro';
 import { localize, ui, type Lang } from '../i18n';
 import { getPosts } from '../lib/posts';
 
@@ -15,15 +17,9 @@ const contact = localize(lang, '/contact/');
 
 const copy = {
   en: {
-    coverKicker: 'Cover Story · About',
-    glanceKicker: 'At a glance',
-    glance: [
-      ['Now', 'Ph.D. candidate, Université de Montréal'],
-      ['Also', 'Research intern, Polytechnique Montréal'],
-      ['Focus', 'AI agent observability & energy'],
-      ['Before', 'Senior backend engineer · 7+ years'],
-    ],
-    cta: 'Contact →',
+    greeting: 'Hi, I’m',
+    subtitle: 'Research-minded engineer. Systems-minded researcher.',
+    cta: 'Contact me',
     projectsTitle: 'Projects',
     projectsSub: '— selected work',
     entries: 'entries',
@@ -44,15 +40,9 @@ const copy = {
     },
   },
   zh: {
-    coverKicker: '封面故事 · 关于',
-    glanceKicker: '速览',
-    glance: [
-      ['现在', '蒙特利尔大学 博士候选人'],
-      ['同时', 'Polytechnique Montréal 研究实习'],
-      ['方向', 'AI Agent 可观测性与能耗'],
-      ['之前', '资深后端工程师 · 7 年+'],
-    ],
-    cta: '联系我 →',
+    greeting: '你好，我是',
+    subtitle: '带着研究眼光的工程师，带着系统思维的研究者。',
+    cta: '联系我',
     projectsTitle: '项目',
     projectsSub: '— 精选作品',
     entries: '个',
@@ -84,73 +74,50 @@ const projects = [
 ---
 
 <Base>
-  <!-- Cover story: introduction -->
-  <section class="cover" id="about">
+  <!-- Hero: greeting, intro, contact, socials; illustration on the right -->
+  <section class="hero" id="about">
     <div class="wrap">
-      <div class="cover-head">
-        <span class="kicker">{copy.coverKicker}</span>
+      <div class="hero-text">
+        <h1>{copy.greeting} Lé<em>o</em>n</h1>
+        <p class="hero-sub">{copy.subtitle}</p>
+
         {
           lang === 'en' ? (
-            <h1>
-              Research-minded <em>engineer.</em> <span class="highlight">Systems-minded</span> <em>researcher.</em>
-            </h1>
+            <div class="lede">
+              <p>
+                I am a Ph.D. candidate in Computer Science at the{' '}
+                <a href="https://www.umontreal.ca/en/" target="_blank" rel="noopener">Université de Montréal</a>, and a
+                research intern at Polytechnique Montréal. I study AI agents from the inside: their trajectories, their
+                energy use, and how to verify what they actually do. I'm especially drawn to observing and optimizing the
+                energy cost of agent systems end to end, so that agents become more transparent and more efficient.
+              </p>
+              <p>
+                Before the Ph.D., I spent more than seven years as a senior backend engineer, designing the architecture
+                of cloud search services. I still think like a production engineer: what breaks, how you'd know, and what
+                it costs.
+              </p>
+              <p>I also build AI products, and I'm open to any project idea. Let's talk.</p>
+            </div>
           ) : (
-            <h1>
-              带着研究眼光的<em>工程师</em>，<br /><span class="highlight">带着系统思维</span>的<em>研究者</em>。
-            </h1>
+            <div class="lede">
+              <p>
+                我是<a href="https://www.umontreal.ca/" target="_blank" rel="noopener">蒙特利尔大学</a>计算机专业的博士候选人，同时在
+                Polytechnique Montréal 实习。我研究 AI Agent 的运行轨迹、能耗与可观测性验证，尤其关注如何系统地观测和优化 AI
+                Agent 的能耗，让 Agent 变得更透明、更高效。
+              </p>
+              <p>
+                读博之前，我做了 7 年多的资深后端开发，负责云搜索服务的架构设计。我至今保留着生产环境工程师的思维：什么会坏，怎么发现，代价多大。
+              </p>
+              <p>我也是一名 AI 产品开发者，对任何项目想法都持开放态度，欢迎随时找我聊聊。</p>
+            </div>
           )
         }
+
+        <a class="cta" href={contact}>{copy.cta}</a>
+        <Socials />
       </div>
 
-      {
-        lang === 'en' ? (
-          <div class="lede">
-            <p>
-              I am a Ph.D. candidate in Computer Science at the{' '}
-              <a href="https://www.umontreal.ca/en/" target="_blank" rel="noopener">Université de Montréal</a>, and a
-              research intern at Polytechnique Montréal. I study AI agents from the inside: their trajectories, their
-              energy use, and how to verify what they actually do. I'm especially drawn to observing and optimizing the
-              energy cost of agent systems end to end, so that agents become more transparent and more efficient.
-            </p>
-            <p>
-              Before the Ph.D., I spent more than seven years as a senior backend engineer, designing the architecture of
-              cloud search services. I still think like a production engineer: what breaks, how you'd know, and what it
-              costs.
-            </p>
-            <p>
-              I also build AI products, and I'm open to any project idea. If you have one,{' '}
-              <a href={contact}>let's talk</a>.
-            </p>
-          </div>
-        ) : (
-          <div class="lede">
-            <p>
-              我是<a href="https://www.umontreal.ca/" target="_blank" rel="noopener">蒙特利尔大学</a>计算机专业的博士候选人，同时在
-              Polytechnique Montréal 实习。我研究 AI Agent 的运行轨迹、能耗与可观测性验证，尤其关注如何系统地观测和优化 AI Agent
-              的能耗，让 Agent 变得更透明、更高效。
-            </p>
-            <p>
-              读博之前，我做了 7 年多的资深后端开发，负责云搜索服务的架构设计。我至今保留着生产环境工程师的思维：什么会坏，怎么发现，代价多大。
-            </p>
-            <p>
-              我也是一名 AI 产品开发者，对任何项目想法都持开放态度，欢迎随时<a href={contact}>找我聊聊</a>。
-            </p>
-          </div>
-        )
-      }
-
-      <aside class="glance" aria-label={copy.glanceKicker}>
-        <span class="kicker">{copy.glanceKicker}</span>
-        <dl>
-          {copy.glance.map(([term, value]) => (
-            <div>
-              <dt>{term}</dt>
-              <dd>{value}</dd>
-            </div>
-          ))}
-        </dl>
-        <a class="cta" href={contact}>{copy.cta}</a>
-      </aside>
+      <HeroArt lang={lang} />
     </div>
   </section>
 

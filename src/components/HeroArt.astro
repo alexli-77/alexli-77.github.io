@@ -1,0 +1,63 @@
+---
+// Line-art infographic for the hero: an agent's trajectory, one step under the
+// magnifier (observability), and the energy each step cost. Colors come from
+// CSS tokens so it follows dark mode.
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const labels = {
+  en: ['plan', 'search', 'call tool', 'observe', 'answer', 'energy / step'],
+  zh: ['规划', '检索', '调用工具', '观察', '回答', '每步能耗'],
+}[lang];
+
+// lx/ly/anchor place each label clear of the curve.
+const steps = [
+  { x: 96, y: 92, label: labels[0], lx: 60, ly: 56, anchor: 'start' },
+  { x: 330, y: 150, label: labels[1], lx: 366, ly: 155, anchor: 'start' },
+  { x: 150, y: 270, label: labels[2], lx: 150, ly: 232, anchor: 'middle' },
+  { x: 372, y: 352, label: labels[3], lx: 372, ly: 280, anchor: 'middle' },
+  { x: 214, y: 466, label: labels[4], lx: 180, ly: 471, anchor: 'end' },
+];
+const energy = [34, 58, 92, 46, 28];
+---
+
+<svg class="hero-art" viewBox="0 0 480 640" role="img" aria-label="An AI agent's trajectory through five steps, with the energy used by each step">
+  <defs>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.4" class="art-dot" />
+    </pattern>
+  </defs>
+
+  <rect x="0" y="0" width="480" height="640" fill="url(#dots)" />
+
+  <!-- trajectory -->
+  <path
+    class="art-line"
+    d="M96 92 C 200 60, 280 90, 330 150 S 220 250, 150 270 S 300 320, 372 352 S 280 450, 214 466"
+  />
+
+  <!-- magnifier on the observed step -->
+  <circle cx="372" cy="352" r="58" class="art-lens" />
+  <line x1="414" y1="394" x2="456" y2="436" class="art-handle" />
+
+  {
+    steps.map((s, i) => (
+      <g>
+        <circle cx={s.x} cy={s.y} r="22" class={i === 3 ? 'art-node is-active' : 'art-node'} />
+        <text x={s.x} y={s.y + 5} text-anchor="middle" class="art-num">{String(i + 1).padStart(2, '0')}</text>
+        <text x={s.lx} y={s.ly} text-anchor={s.anchor} class="art-label">
+          {s.label}
+        </text>
+      </g>
+    ))
+  }
+
+  <!-- energy per step -->
+  <text x="24" y="540" class="art-label">{labels[5]}</text>
+  <line x1="24" y1="616" x2="456" y2="616" class="art-axis" />
+  {energy.map((h, i) => <rect x={40 + i * 84} y={616 - h * 0.6} width="52" height={h * 0.6} class={i === 3 ? 'art-bar is-active' : 'art-bar'} />)}
+</svg>

@@ -1,0 +1,18 @@
+---
+import { brandIcons } from '../icons';
+import { socials } from '../profile';
+---
+
+<ul class="socials">
+  {
+    socials.map((s) => (
+      <li>
+        <a href={s.url} target="_blank" rel="noopener" aria-label={s.label} title={s.label}>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d={brandIcons[s.brand]} />
+          </svg>
+        </a>
+      </li>
+    ))
+  }
+</ul>

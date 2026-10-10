@@ -1,24 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
+import Socials from '../components/Socials.astro';
 import { type Lang } from '../i18n';
-import { brandIcons, type Brand } from '../icons';
+import { brandIcons } from '../icons';
+import { EMAIL, WHATSAPP } from '../profile';
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
-
-// Fill in a value to show it on the page; empty entries are hidden.
-const EMAIL = 'yang.li.9@umontreal.ca';
-const WHATSAPP = ''; // e.g. '+1-514-555-0100'
-const socials: { brand: Brand; label: string; url: string }[] = [
-  { brand: 'linkedin', label: 'LinkedIn', url: '' },
-  { brand: 'github', label: 'GitHub', url: 'https://github.com/alexli-77' },
-  { brand: 'x', label: 'X', url: '' },
-  { brand: 'facebook', label: 'Facebook', url: '' },
-  { brand: 'instagram', label: 'Instagram', url: '' },
-].filter((s) => s.url);
 
 const copy = {
   en: {
@@ -47,14 +38,14 @@ const copy = {
 ---
 
 <Base title={copy.title} description={copy.description}>
-  <section class="cover contact">
+  <section class="contact">
     <div class="wrap">
-      <div class="cover-head">
+      <div class="contact-head">
         <span class="kicker">{copy.kicker}</span>
         <h1>{copy.heading}</h1>
       </div>
 
-      <div class="lede">
+      <div class="contact-body">
         <p>{copy.intro}</p>
         <p>{copy.message}</p>
 
@@ -82,20 +73,7 @@ const copy = {
         </ul>
 
         <p>{copy.social}</p>
-
-        <ul class="socials">
-          {
-            socials.map((s) => (
-              <li>
-                <a href={s.url} target="_blank" rel="noopener" aria-label={s.label} title={s.label}>
-                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d={brandIcons[s.brand]} />
-                  </svg>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
+        <Socials />
       </div>
     </div>
   </section>
