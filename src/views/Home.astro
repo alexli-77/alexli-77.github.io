@@ -178,24 +178,48 @@ const projects = [
 </Base>
 
 <script>
+  // Desktop: hover (or keyboard focus) opens the drawer; clicking the button goes to /contact/.
+  // Touch: there's no hover, so a tap toggles the drawer instead.
   const row = document.querySelector<HTMLElement>('[data-drawer]');
   const toggle = row?.querySelector<HTMLElement>('[data-drawer-toggle]');
   const drawer = row?.querySelector<HTMLElement>('.cta-drawer');
+  const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   if (row && toggle && drawer) {
+    let closeTimer: number | undefined;
+
     const setOpen = (open: boolean) => {
+      clearTimeout(closeTimer);
+      if (open === row.classList.contains('is-open')) return;
       row.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', String(open));
       drawer.inert = !open;
       // On phones the drawer wraps below the button; bring it on screen.
-      if (open) requestAnimationFrame(() => drawer.scrollIntoView({ block: 'nearest', behavior: 'smooth' }));
+      if (open && !canHover) requestAnimationFrame(() => drawer.scrollIntoView({ block: 'nearest', behavior: 'smooth' }));
     };
-    toggle.addEventListener('click', (event) => {
-      event.preventDefault();
-      setOpen(!row.classList.contains('is-open'));
+    const closeSoon = () => {
+      clearTimeout(closeTimer);
+      closeTimer = window.setTimeout(() => setOpen(false), 250);
+    };
+
+    if (canHover) {
+      row.addEventListener('pointerenter', () => setOpen(true));
+      row.addEventListener('pointerleave', closeSoon);
+    } else {
+      toggle.addEventListener('click', (event) => {
+        event.preventDefault();
+        setOpen(!row.classList.contains('is-open'));
+      });
+      document.addEventListener('click', (event) => {
+        if (!row.contains(event.target as Node)) setOpen(false);
+      });
+    }
+    // Keyboard focus only; a tap also focuses the button and must not double-toggle.
+    row.addEventListener('focusin', (event) => {
+      if ((event.target as HTMLElement).matches(':focus-visible')) setOpen(true);
     });
-    document.addEventListener('click', (event) => {
-      if (!row.contains(event.target as Node)) setOpen(false);
+    row.addEventListener('focusout', (event) => {
+      if (!row.contains(event.relatedTarget as Node)) closeSoon();
     });
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') setOpen(false);
