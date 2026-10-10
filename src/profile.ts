@@ -1,8 +1,8 @@
 import type { Brand } from './icons';
 
-// Contact details shown on the contact page.
+// Contact details shown on the contact page, the hero's Contact me drawer, and the footer.
 // Fill in a value to show it; empty entries are hidden.
-export const EMAIL = 'yang.li.9@umontreal.ca';
+export const EMAIL = 'alex.geekai@outlook.com';
 export const WHATSAPP = ''; // e.g. '+1-514-555-0100'
 
 export const socials: { brand: Brand; label: string; url: string }[] = [

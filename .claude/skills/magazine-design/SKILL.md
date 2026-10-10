@@ -41,7 +41,7 @@ Layout: `.wrap` caps width at 1200px with a fluid `--gutter`. The cover uses a 1
 5. **One drop cap per page**, on the first paragraph of the lede or the article.
 6. **Rhythm alternates cream → navy band → cream.** At most one navy band per page.
 7. **Links** are navy with a 2px mustard bottom border. On hover, swap to a navy border or a mustard text color. Never default blue underlines.
-8. **Motion is minimal**: 0.2s color/border transitions and a 1.03 image scale on hover. Nothing loops or bounces.
+8. **Motion is minimal**: 0.2s color/border transitions and a 1.03 image scale on hover. Nothing loops or bounces, except the hero's Contact me drawer, which the user asked to pop open with a jelly effect.
 
 ## Two languages
 

@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { alternatePath, getLang, localize, ui } from '../i18n';
+import { EMAIL } from '../profile';
 
 interface Props {
   title?: string;
@@ -99,7 +100,7 @@ const fonts =
         <span>{t.colophon}</span>
         <span>
           <a href="https://github.com/alexli-77" target="_blank" rel="noopener">GitHub</a> ·
-          <a href="mailto:yang.li.9@umontreal.ca">{t.email}</a> · © 2026 Léon
+          <a href={`mailto:${EMAIL}`}>{t.email}</a> · © 2026 Léon
         </span>
       </div>
     </footer>

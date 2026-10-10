@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import HeroArt from '../components/HeroArt.astro';
 import PostList from '../components/PostList.astro';
+import Socials from '../components/Socials.astro';
 import { localize, ui, type Lang } from '../i18n';
 import { getPosts } from '../lib/posts';
 
@@ -86,24 +87,39 @@ const projects = [
               <p>
                 I'm a Ph.D. candidate in Computer Science at Université de Montréal and a research intern at Polytechnique
                 Montréal. I study AI agents: their trajectories, their energy use, and how to verify what they do. My goal
-                is agents that are more transparent and more efficient.
+                is agents that are more transparent and more efficient. Before that, I spent 7+ years as a senior backend
+                engineer, designing cloud search architecture.
               </p>
-              <p>Before that, I spent 7+ years as a senior backend engineer, designing cloud search architecture.</p>
-              <p>I also build AI products. Have an idea? Let's talk.</p>
+              <p>
+                I also build AI products on my own, like{' '}
+                <a href="https://www.docuengineai.com/" target="_blank" rel="noopener">DocuEngine</a> and{' '}
+                <a href="https://www.unimapcondor.com/" target="_blank" rel="noopener">UniMap Condor</a>. Have an idea?
+                Let's talk.
+              </p>
             </div>
           ) : (
             <div class="lede">
               <p>
                 我是蒙特利尔大学计算机博士候选人，也在 Polytechnique Montréal 实习。我研究 AI Agent
-                的运行轨迹、能耗与可观测性验证，目标是让 Agent 更透明、更高效。
+                的运行轨迹、能耗与可观测性验证，目标是让 Agent 更透明、更高效。读博前，我做了 7
+                年多资深后端开发，负责云搜索服务的架构设计。
               </p>
-              <p>读博前，我做了 7 年多资深后端开发，负责云搜索服务的架构设计。</p>
-              <p>我也做 AI 产品。有想法？欢迎来聊。</p>
+              <p>
+                我也独立开发 AI 产品，比如
+                <a href="https://www.docuengineai.com/" target="_blank" rel="noopener">DocuEngine</a> 和
+                <a href="https://www.unimapcondor.com/" target="_blank" rel="noopener">UniMap Condor</a>。有想法？欢迎来聊。
+              </p>
             </div>
           )
         }
 
-        <a class="cta" href={contact}>{copy.cta}</a>
+        <!-- Contact me opens a drawer of links; without JS it's a plain link to /contact/ -->
+        <div class="cta-row" data-drawer>
+          <a class="cta" href={contact} aria-expanded="false" aria-controls="contact-drawer" data-drawer-toggle>{copy.cta}</a>
+          <div class="cta-drawer" id="contact-drawer" inert>
+            <Socials email />
+          </div>
+        </div>
       </div>
 
       <HeroArt lang={lang} />
@@ -160,3 +176,29 @@ const projects = [
     </div>
   </section>
 </Base>
+
+<script>
+  const row = document.querySelector<HTMLElement>('[data-drawer]');
+  const toggle = row?.querySelector<HTMLElement>('[data-drawer-toggle]');
+  const drawer = row?.querySelector<HTMLElement>('.cta-drawer');
+
+  if (row && toggle && drawer) {
+    const setOpen = (open: boolean) => {
+      row.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      drawer.inert = !open;
+      // On phones the drawer wraps below the button; bring it on screen.
+      if (open) requestAnimationFrame(() => drawer.scrollIntoView({ block: 'nearest', behavior: 'smooth' }));
+    };
+    toggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      setOpen(!row.classList.contains('is-open'));
+    });
+    document.addEventListener('click', (event) => {
+      if (!row.contains(event.target as Node)) setOpen(false);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+  }
+</script>

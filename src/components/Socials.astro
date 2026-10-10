@@ -1,9 +1,29 @@
 ---
 import { brandIcons } from '../icons';
-import { socials } from '../profile';
+import { EMAIL, socials } from '../profile';
+
+interface Props {
+  /** Prepend a mailto icon (used by the hero's Contact me drawer). */
+  email?: boolean;
+  class?: string;
+}
+
+const { email = false, class: className } = Astro.props;
 ---
 
-<ul class="socials">
+<ul class:list={['socials', className]}>
+  {
+    email && (
+      <li>
+        <a href={`mailto:${EMAIL}`} aria-label="Email" title={EMAIL}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="2.5" y="5" width="19" height="14" rx="1" />
+            <path d="m3 6 9 7 9-7" />
+          </svg>
+        </a>
+      </li>
+    )
+  }
   {
     socials.map((s) => (
       <li>

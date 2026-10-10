@@ -108,3 +108,14 @@ Inside `.prose`, a `>` blockquote becomes a pull quote, `---` becomes a `◆ ◆
 ```
 
 Clicking the email copies it. Brand icon paths live in `src/icons.ts` (inline SVG, `currentColor`); links are set in `src/profile.ts`. The contact page is the only place icons are used.
+
+## Contact me drawer (hero)
+
+```html
+<div class="cta-row" data-drawer>
+  <a class="cta" href="/contact/" aria-expanded="false" aria-controls="contact-drawer" data-drawer-toggle>Contact me</a>
+  <div class="cta-drawer" id="contact-drawer" inert><Socials email /></div>
+</div>
+```
+
+Clicking the button opens the icon drawer with a staggered jelly pop (script in `src/views/Home.astro`). Without JS the button is a plain link to the contact page. This is the one place a bouncy animation is allowed.
