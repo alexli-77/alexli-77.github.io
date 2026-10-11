@@ -313,8 +313,11 @@ footer a { color: var(--ink); border-bottom: 1px solid var(--mustard); }
 [data-theme="dark"] .astro-code,
 [data-theme="dark"] .astro-code span { color: var(--shiki-dark) !important; background-color: var(--shiki-dark-bg) !important; }
 .prose img { margin: 2em 0; border: 1px solid var(--ink); }
-/* Project diagrams are wide; let them use the full column instead of the 68ch text measure. */
-.project .prose img { width: calc(min(var(--max), 100vw) - 2 * var(--gutter)); max-width: none; }
+/* Diagrams (SVG) are wide; let them use the full column instead of the 68ch text measure. Photos keep the measure. */
+.prose img[src$=".svg"] { width: calc(min(var(--max), 100vw) - 2 * var(--gutter)); max-width: none; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; }
+.prose th, .prose td { padding: 8px 12px 8px 0; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.prose th { color: var(--ink); font-weight: 600; border-bottom: 2px solid var(--ink); }
 .prose hr { border: 0; text-align: center; margin: 2.5em 0; }
 .prose hr::after { content: "◆ ◆ ◆"; color: var(--mustard); letter-spacing: 1em; }
 .back { display: inline-block; margin-top: 64px; font: 500 14px/1 var(--sans); color: var(--ink); border-bottom: 2px solid var(--mustard); padding-bottom: 4px; }

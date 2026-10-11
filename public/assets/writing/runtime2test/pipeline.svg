@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" role="img" aria-label="Runtime2Test pipeline: three phases inherited from ProDJ capture runtime object behaviour, three new phases send static and runtime context to a fine-tuned LLM that writes JUnit tests. Three modes are compared.">
+<style>
+.h1{font:600 24px Fraunces,Georgia,serif;fill:#102a42}
+.t{font:600 14px Inter,-apple-system,"Helvetica Neue",Arial,sans-serif;fill:#102a42}
+.s{font:400 12px Inter,-apple-system,"Helvetica Neue",Arial,sans-serif;fill:#48647f}
+.k{font:500 11px "JetBrains Mono",ui-monospace,Menlo,monospace;letter-spacing:.12em;fill:#7a5c10}
+.m{font:400 11px "JetBrains Mono",ui-monospace,Menlo,monospace;fill:#617d98}
+</style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c8961e"/></marker></defs>
+<rect width="1200" height="440" fill="#fffaeb"/>
+<text x="40" y="48" class="h1">Runtime2Test: from a running program to JUnit tests</text>
+<line x1="40" y1="104" x2="560" y2="104" stroke="#617d98" stroke-width="1.2"/><text x="40" y="94" class="k">INHERITED FROM ProDJ</text>
+<line x1="610" y1="104" x2="1160" y2="104" stroke="#c8961e" stroke-width="2"/><text x="610" y="94" class="k">OUR CONTRIBUTION</text>
+<rect x="40" y="124" width="170" height="96" rx="8" fill="#ffffff" stroke="#102a42" stroke-width="1.2"/>
+<text x="54" y="150" class="t">1 · Prepare</text><text x="54" y="178" class="s">Spoon static</text><text x="54" y="196" class="s">analysis</text>
+<line x1="210" y1="172" x2="228" y2="172" stroke="#c8961e" stroke-width="2" marker-end="url(#a)"/>
+<rect x="230" y="124" width="170" height="96" rx="8" fill="#ffffff" stroke="#102a42" stroke-width="1.2"/>
+<text x="244" y="150" class="t">2 · Instrument</text><text x="244" y="178" class="s">ByteBuddy agent</text><text x="244" y="196" class="s">on a real workload</text>
+<line x1="400" y1="172" x2="418" y2="172" stroke="#c8961e" stroke-width="2" marker-end="url(#a)"/>
+<rect x="420" y="124" width="170" height="96" rx="8" fill="#ffffff" stroke="#102a42" stroke-width="1.2"/>
+<text x="434" y="150" class="t">3 · Capture</text><text x="434" y="178" class="s">construct, set-field,</text><text x="434" y="196" class="s">call events (JSON)</text>
+<line x1="590" y1="172" x2="608" y2="172" stroke="#c8961e" stroke-width="2" marker-end="url(#a)"/>
+<rect x="610" y="124" width="170" height="96" rx="8" fill="#fceec5" stroke="#102a42" stroke-width="1.2"/>
+<text x="624" y="150" class="t">4 · Generate</text><text x="624" y="178" class="s">static snapshot</text><text x="624" y="196" class="s">+ runtime facts</text>
+<line x1="780" y1="172" x2="798" y2="172" stroke="#c8961e" stroke-width="2" marker-end="url(#a)"/>
+<rect x="800" y="124" width="170" height="96" rx="8" fill="#fceec5" stroke="#102a42" stroke-width="1.2"/>
+<text x="814" y="150" class="t">5 · LLM service</text><text x="814" y="178" class="s">Qwen2.5-Coder-7B</text><text x="814" y="196" class="s">QLoRA fine-tuned</text>
+<line x1="970" y1="172" x2="988" y2="172" stroke="#c8961e" stroke-width="2" marker-end="url(#a)"/>
+<rect x="990" y="124" width="170" height="96" rx="8" fill="#fceec5" stroke="#102a42" stroke-width="1.2"/>
+<text x="1004" y="150" class="t">6 · Post-process</text><text x="1004" y="178" class="s">fix imports, drop</text><text x="1004" y="196" class="s">broken tests</text>
+<text x="40" y="270" class="k">THREE MODES COMPARED</text>
+<rect x="40" y="284" width="360" height="86" rx="8" fill="#ffffff" stroke="#102a42" stroke-width="1.2" stroke-dasharray="5 4"/>
+<text x="56" y="312" class="t">Baseline</text><text x="56" y="334" class="m">no LLM</text><text x="56" y="354" class="s">recorded traces → plain Java tests</text>
+<rect x="420" y="284" width="360" height="86" rx="8" fill="#ffffff" stroke="#102a42" stroke-width="1.2"/>
+<text x="436" y="312" class="t">LLM static</text><text x="436" y="334" class="m">LLM input</text><text x="436" y="354" class="s">static snapshot only</text>
+<rect x="800" y="284" width="360" height="86" rx="8" fill="#ffffff" stroke="#102a42" stroke-width="1.2"/>
+<text x="816" y="312" class="t">LLM hybrid</text><text x="816" y="334" class="m">LLM input</text><text x="816" y="354" class="s">static snapshot + runtime facts</text>
+<text x="40" y="410" class="s">Runtime facts: per-method call counts, return-value distribution, nested and mocked calls, and parameter shapes seen at run time.</text>
+</svg>

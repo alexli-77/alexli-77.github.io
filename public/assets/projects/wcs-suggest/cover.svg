@@ -1,58 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="WCS Suggest: typing bao in a search box suggests 宝马X5, 宝马3系, 宝骏510 and 保时捷">
-  <style>
-    .h { font: 600 120px Fraunces, Georgia, serif; fill: #102a42; }
-    .sub { font: 400 36px Inter, -apple-system, "Helvetica Neue", Arial, sans-serif; fill: #48647f; }
-    .k { font: 500 22px "JetBrains Mono", ui-monospace, Menlo, monospace; letter-spacing: 0.12em; fill: #7a5c10; }
-    .m { font: 400 22px "JetBrains Mono", ui-monospace, Menlo, monospace; fill: #617d98; }
-    .typed { font: 400 40px "JetBrains Mono", ui-monospace, Menlo, monospace; fill: #102a42; }
-    .sug { font: 400 36px "PingFang SC", "Noto Sans SC", Inter, sans-serif; fill: #48647f; }
-    .hit { font-weight: 600; fill: #102a42; }
-  </style>
-  <defs>
-    <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.8" fill="#102a42" opacity="0.14"/></pattern>
-  </defs>
-  <rect width="1600" height="900" fill="#fffaeb"/>
-  <rect width="1600" height="900" fill="url(#dots)"/>
-
-  <text x="110" y="100" class="k">INDUSTRY · 58.COM · 2019–2020</text>
-  <text x="104" y="226" class="h">WCS Suggest</text>
-  <text x="110" y="288" class="sub">Real-time query auto-completion</text>
-
-  <!-- search box -->
-  <rect x="110" y="380" width="760" height="96" rx="16" fill="#ffffff" stroke="#102a42" stroke-width="3"/>
-  <circle cx="168" cy="426" r="18" fill="none" stroke="#102a42" stroke-width="4"/>
-  <line x1="181" y1="439" x2="196" y2="454" stroke="#102a42" stroke-width="4" stroke-linecap="round"/>
-  <text x="222" y="441" class="typed">bao</text>
-  <line x1="300" y1="404" x2="300" y2="452" stroke="#c8961e" stroke-width="4"/>
-
-  <!-- dropdown -->
-  <rect x="110" y="490" width="760" height="320" rx="16" fill="#ffffff" stroke="#102a42" stroke-width="2.5"/>
-  <rect x="112" y="492" width="756" height="78" rx="14" fill="#fceec5"/>
-  <text x="160" y="544" class="sug"><tspan class="hit">宝</tspan>马X5</text>
-  <text x="160" y="624" class="sug"><tspan class="hit">宝</tspan>马3系</text>
-  <text x="160" y="704" class="sug"><tspan class="hit">宝</tspan>骏510</text>
-  <text x="160" y="784" class="sug"><tspan class="hit">保</tspan>时捷</text>
-  <text x="840" y="544" class="m" text-anchor="end">bao·ma</text>
-  <text x="840" y="624" class="m" text-anchor="end">bao·ma</text>
-  <text x="840" y="704" class="m" text-anchor="end">bao·jun</text>
-  <text x="840" y="784" class="m" text-anchor="end">bao·shi·jie</text>
-
-  <!-- tiers -->
-  <text x="1010" y="372" class="k">SEGMENT TIERS</text>
-  <g stroke="#102a42" stroke-width="2.5">
-    <rect x="1010" y="392" width="480" height="64" rx="12" fill="#e9b949"/>
-    <rect x="1010" y="476" width="480" height="64" rx="12" fill="#fceec5"/>
-    <rect x="1010" y="560" width="480" height="64" rx="12" fill="#ffffff"/>
-    <rect x="1010" y="644" width="480" height="64" rx="12" fill="#ffffff"/>
-    <rect x="1010" y="728" width="480" height="64" rx="12" fill="#ffffff"/>
-  </g>
-  <g class="m" style="fill:#102a42">
-    <text x="1036" y="432">memtable</text>
-    <text x="1036" y="516">sealed segments</text>
-    <text x="1036" y="600">merged FST</text>
-    <text x="1036" y="684">real-time log</text>
-    <text x="1036" y="768">static index</text>
-  </g>
-  <text x="1464" y="432" class="m" text-anchor="end">live</text>
-  <path d="M870 650 C 930 650, 950 592, 1004 592" fill="none" stroke="#c8961e" stroke-width="5" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="52 82 1520 855" width="1600" height="900" role="img" aria-label="WCS Suggest: typing bao in a search box suggests 宝马X5, 宝马3系 and 保时捷, next to the Suggest wordmark."><defs><linearGradient id="gsug" x1="0" y1="0" x2="1" y2="0.3"><stop offset="0" stop-color="#f97316"/><stop offset="1" stop-color="#facc15"/></linearGradient></defs><rect x="-200" y="-200" width="2000" height="1300" fill="#ffffff"/>
+<g transform="rotate(-10 170 270)"><rect x="130" y="238" width="80" height="80" rx="16" fill="#0b2545"/><rect x="130" y="230" width="80" height="78" rx="16" fill="#fff7ed" stroke="#0b2545" stroke-width="6"/><text x="170" y="284" text-anchor="middle" font-family="'Arial Black','Arial Rounded MT Bold','Helvetica Neue',Arial,sans-serif" font-size="42" fill="#0b2545">b</text></g>
+<g transform="rotate(6 280 230)"><rect x="240" y="198" width="80" height="80" rx="16" fill="#0b2545"/><rect x="240" y="190" width="80" height="78" rx="16" fill="#fff7ed" stroke="#0b2545" stroke-width="6"/><text x="280" y="244" text-anchor="middle" font-family="'Arial Black','Arial Rounded MT Bold','Helvetica Neue',Arial,sans-serif" font-size="42" fill="#0b2545">a</text></g>
+<g transform="rotate(-4 390 265)"><rect x="350" y="233" width="80" height="80" rx="16" fill="#0b2545"/><rect x="350" y="225" width="80" height="78" rx="16" fill="#fff7ed" stroke="#0b2545" stroke-width="6"/><text x="390" y="279" text-anchor="middle" font-family="'Arial Black','Arial Rounded MT Bold','Helvetica Neue',Arial,sans-serif" font-size="42" fill="#0b2545">o</text></g>
+<path d="M460 250 C 500 260, 520 300, 520 340" fill="none" stroke="#fb923c" stroke-width="5" stroke-dasharray="10 9"/>
+<rect x="108" y="372" width="520" height="104" rx="52" fill="#0b2545"/>
+<rect x="100" y="360" width="520" height="104" rx="52" fill="#ffffff" stroke="#0b2545" stroke-width="8"/>
+<circle cx="170" cy="408" r="24" fill="none" stroke="#0b2545" stroke-width="8"/><line x1="187" y1="425" x2="206" y2="444" stroke="#0b2545" stroke-width="9" stroke-linecap="round"/>
+<text x="226" y="428" font-family="'Arial Black','Arial Rounded MT Bold','Helvetica Neue',Arial,sans-serif" font-size="50" fill="#0b2545">bao</text><rect x="338" y="384" width="7" height="52" rx="3" fill="#f97316"/>
+<rect x="108" y="488" width="520" height="262" rx="26" fill="#0b2545"/>
+<rect x="100" y="478" width="520" height="262" rx="26" fill="#ffffff" stroke="#0b2545" stroke-width="8"/>
+<rect x="114" y="494" width="492" height="72" rx="16" fill="#fed7aa"/>
+<text x="150" y="544" font-family="'PingFang SC','Hiragino Sans GB','Noto Sans SC','Microsoft YaHei',sans-serif" font-size="40" font-weight="700" fill="#0b2545"><tspan fill="#ea580c">宝</tspan>马X5</text>
+<text x="580" y="544" text-anchor="end" font-family="'Helvetica Neue',Arial,sans-serif" font-size="26" fill="#64748b">bao ma</text>
+<text x="150" y="624" font-family="'PingFang SC','Hiragino Sans GB','Noto Sans SC','Microsoft YaHei',sans-serif" font-size="40" font-weight="700" fill="#0b2545"><tspan fill="#ea580c">宝</tspan>马3系</text>
+<text x="580" y="624" text-anchor="end" font-family="'Helvetica Neue',Arial,sans-serif" font-size="26" fill="#64748b">bao ma</text>
+<text x="150" y="704" font-family="'PingFang SC','Hiragino Sans GB','Noto Sans SC','Microsoft YaHei',sans-serif" font-size="40" font-weight="700" fill="#0b2545"><tspan fill="#ea580c">保</tspan>时捷</text>
+<text x="580" y="704" text-anchor="end" font-family="'Helvetica Neue',Arial,sans-serif" font-size="26" fill="#64748b">bao shi jie</text>
+<path d="M660 354 Q667.28 372.72 686 380 Q667.28 387.28 660 406 Q652.72 387.28 634 380 Q652.72 372.72 660 354 Z" fill="#facc15" stroke="#0b2545" stroke-width="5" stroke-linejoin="round"/>
+<path d="M90 622 Q95.04 634.96 108 640 Q95.04 645.04 90 658 Q84.96 645.04 72 640 Q84.96 634.96 90 622 Z" fill="#fb923c" stroke="#0b2545" stroke-width="5" stroke-linejoin="round"/>
+<rect x="150" y="780" width="330" height="53" rx="27" fill="#0b2545" stroke="#0b2545" stroke-width="5"/><text x="315.0" y="816" text-anchor="middle" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="28" fill="#fdba74" letter-spacing="1">TOP 20 · REAL TIME</text>
+<rect x="800" y="270" width="150" height="65" rx="32" fill="#ffffff" stroke="#0b2545" stroke-width="5"/><text x="875.0" y="314" text-anchor="middle" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="34" fill="#0b2545" letter-spacing="1">WCS</text>
+<g transform="skewX(-8)">
+<text x="850" y="490.0" font-family="'Arial Black','Arial Rounded MT Bold','Helvetica Neue',Arial,sans-serif" font-size="165" font-weight="900" stroke-linejoin="round" paint-order="stroke" transform="translate(12,14)" fill="#0b2545" stroke="#0b2545" stroke-width="33">Suggest</text>
+<text x="850" y="490.0" font-family="'Arial Black','Arial Rounded MT Bold','Helvetica Neue',Arial,sans-serif" font-size="165" font-weight="900" stroke-linejoin="round" paint-order="stroke" fill="#ffffff" stroke="#0b2545" stroke-width="33">Suggest</text>
+<text x="850" y="490.0" font-family="'Arial Black','Arial Rounded MT Bold','Helvetica Neue',Arial,sans-serif" font-size="165" font-weight="900" stroke-linejoin="round" paint-order="stroke" fill="#ffffff" stroke="#ffffff" stroke-width="21">Suggest</text>
+<text x="850" y="490.0" font-family="'Arial Black','Arial Rounded MT Bold','Helvetica Neue',Arial,sans-serif" font-size="165" font-weight="900" stroke-linejoin="round" paint-order="stroke" fill="url(#gsug)" stroke="#0b2545" stroke-width="7">Suggest</text>
+</g>
+<rect x="800" y="545" width="620" height="57" rx="28" fill="#0b2545" stroke="#0b2545" stroke-width="5"/><text x="1110.0" y="583" text-anchor="middle" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="30" fill="#ffffff" letter-spacing="1">REAL-TIME AUTO-COMPLETION</text>
+<polygon points="1503.3,275.0 1503.3,325.0 1460.0,350.0 1416.7,325.0 1416.7,275.0 1460.0,250.0" fill="#f97316" stroke="#0b2545" stroke-width="7" stroke-linejoin="round"/><path d="M1460 279 Q1465.88 294.12 1481 300 Q1465.88 305.88 1460 321 Q1454.12 305.88 1439 300 Q1454.12 294.12 1460 279 Z" fill="#fff7ed" stroke="#0b2545" stroke-width="5" stroke-linejoin="round"/>
+<path d="M800 710 C 980.0 676, 1220.0 670, 1400 652" fill="none" stroke="#f97316" stroke-width="14" stroke-linecap="round"/><path d="M908.0 732 C 1070.0 706, 1250.0 698, 1388.0 686" fill="none" stroke="#facc15" stroke-width="8" stroke-linecap="round"/><circle cx="1430" cy="646" r="9" fill="#facc15"/>
 </svg>
