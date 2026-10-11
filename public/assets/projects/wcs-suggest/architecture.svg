@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" role="img" aria-label="WCS Suggest architecture: static and real-time writes build five segment tiers; a query looks up every tier in parallel and merges the top 20">
+  <style>
+    .t { font: 600 15px Inter, -apple-system, "Helvetica Neue", Arial, sans-serif; fill: #102a42; }
+    .s { font: 400 12px Inter, -apple-system, "Helvetica Neue", Arial, sans-serif; fill: #48647f; }
+    .xs { font: 400 11px Inter, -apple-system, "Helvetica Neue", Arial, sans-serif; fill: #48647f; }
+    .k { font: 500 11px "JetBrains Mono", ui-monospace, Menlo, monospace; letter-spacing: 0.12em; fill: #7a5c10; }
+    .m { font: 400 12px "JetBrains Mono", ui-monospace, Menlo, monospace; fill: #102a42; }
+    .ms { font: 400 11px "JetBrains Mono", ui-monospace, Menlo, monospace; fill: #617d98; }
+    .h1 { font: 600 24px Fraunces, Georgia, serif; fill: #102a42; }
+    .box { fill: #ffffff; stroke: #102a42; stroke-width: 1.2; }
+    .hot { fill: #fceec5; stroke: #102a42; stroke-width: 1.2; }
+    .zone { fill: none; stroke: #617d98; stroke-width: 1.2; stroke-dasharray: 5 4; }
+    .q { fill: none; stroke: #c8961e; stroke-width: 2.2; }
+    .w { fill: none; stroke: #3d6a96; stroke-width: 2.2; }
+    .wd { fill: none; stroke: #3d6a96; stroke-width: 1.6; stroke-dasharray: 5 4; }
+  </style>
+  <defs>
+    <marker id="aq" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c8961e"/></marker>
+    <marker id="aw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3d6a96"/></marker>
+  </defs>
+
+  <rect width="1200" height="640" fill="#fffaeb"/>
+  <text x="40" y="48" class="h1">WCS Suggest: one engine, five segment tiers</text>
+  <text x="40" y="74" class="s">One C++ process, two ports: queries on one, real-time writes on the other.</text>
+  <line x1="820" y1="56" x2="850" y2="56" class="q" marker-end="url(#aq)"/><text x="858" y="60" class="s">query</text>
+  <line x1="920" y1="56" x2="950" y2="56" class="w" marker-end="url(#aw)"/><text x="958" y="60" class="s">index / write</text>
+
+  <!-- ===== inputs ===== -->
+  <rect x="40" y="140" width="160" height="64" rx="8" class="box"/>
+  <text x="56" y="166" class="t">Real-time feed</text>
+  <text x="56" y="186" class="ms">add / del · JSON</text>
+
+  <rect x="40" y="280" width="160" height="56" rx="8" class="box"/>
+  <text x="56" y="304" class="t">Query</text>
+  <text x="56" y="324" class="ms">bao &amp; city=1</text>
+
+  <rect x="40" y="356" width="160" height="56" rx="8" class="box"/>
+  <text x="56" y="380" class="t">Suggestions</text>
+  <text x="56" y="400" class="ms">top 20 + highlight</text>
+
+  <rect x="40" y="478" width="160" height="64" rx="8" class="box"/>
+  <text x="56" y="504" class="t">Data file</text>
+  <text x="56" y="524" class="ms">full snapshot</text>
+
+  <!-- ===== processing ===== -->
+  <rect x="240" y="128" width="420" height="88" rx="8" class="hot"/>
+  <text x="256" y="152" class="t">Real-time indexer</text>
+  <text x="256" y="174" class="s">parse → expand terms → insert into the memtable</text>
+  <text x="256" y="194" class="s">append to the on-disk log · record deletes and versions</text>
+
+  <rect x="240" y="252" width="420" height="188" rx="8" class="hot"/>
+  <text x="256" y="276" class="t">Query path</text>
+  <text x="256" y="300" class="s">1  build the key: prefix + city + category, so filters</text>
+  <text x="270" y="318" class="s">are part of the term</text>
+  <text x="256" y="342" class="s">2  exact lookup on all five tiers in parallel</text>
+  <text x="256" y="366" class="s">3  drop deleted docs and stale versions</text>
+  <text x="256" y="390" class="s">4  merge the top 20 by weight with a min-heap</text>
+  <text x="256" y="414" class="s">5  return protobuf with the highlighted span</text>
+
+  <rect x="240" y="466" width="420" height="88" rx="8" class="box"/>
+  <text x="256" y="490" class="t">Full builder</text>
+  <text x="256" y="512" class="s">parse → expand terms → shard by first character</text>
+  <text x="256" y="532" class="s">→ one FST + top-20 posting lists per shard</text>
+
+  <!-- input edges -->
+  <line x1="200" y1="172" x2="238" y2="172" class="w" marker-end="url(#aw)"/>
+  <line x1="200" y1="308" x2="238" y2="308" class="q" marker-end="url(#aq)"/>
+  <line x1="238" y1="384" x2="202" y2="384" class="q" marker-end="url(#aq)"/>
+  <line x1="200" y1="510" x2="238" y2="510" class="w" marker-end="url(#aw)"/>
+
+  <!-- ===== segment tiers ===== -->
+  <rect x="740" y="100" width="420" height="470" rx="10" class="zone"/>
+  <text x="756" y="122" class="k">SEGMENT TIERS · NEWEST FIRST</text>
+
+  <rect x="760" y="134" width="250" height="60" rx="8" class="hot"/>
+  <text x="776" y="158" class="t">Memtable</text>
+  <text x="776" y="178" class="xs">live writes · top-20 heap per term</text>
+
+  <rect x="760" y="222" width="250" height="60" rx="8" class="box"/>
+  <text x="776" y="246" class="t">Sealed segments</text>
+  <text x="776" y="266" class="xs">up to 100 × 100k terms, read-only</text>
+
+  <rect x="760" y="310" width="250" height="60" rx="8" class="box"/>
+  <text x="776" y="334" class="t">Merged FST segments</text>
+  <text x="776" y="354" class="xs">built by a background merge</text>
+
+  <rect x="760" y="398" width="250" height="60" rx="8" class="box"/>
+  <text x="776" y="422" class="t">Real-time log</text>
+  <text x="776" y="442" class="xs">append-only on disk · replayed on start</text>
+
+  <rect x="760" y="486" width="250" height="60" rx="8" class="box"/>
+  <text x="776" y="510" class="t">Static index</text>
+  <text x="776" y="530" class="xs">full build · mmap or in memory</text>
+
+  <!-- tier transitions -->
+  <line x1="800" y1="194" x2="800" y2="220" class="w" marker-end="url(#aw)"/>
+  <text x="812" y="212" class="ms">seal at 100k terms</text>
+  <line x1="800" y1="282" x2="800" y2="308" class="w" marker-end="url(#aw)"/>
+  <text x="812" y="300" class="ms">merge 100 segments</text>
+
+  <!-- delete / version maps -->
+  <rect x="1030" y="134" width="112" height="148" rx="8" class="box"/>
+  <text x="1044" y="158" class="t">Deletes</text>
+  <text x="1044" y="176" class="t">&amp; versions</text>
+  <text x="1044" y="202" class="xs">id → latest</text>
+  <text x="1044" y="218" class="xs">timestamp</text>
+  <text x="1044" y="244" class="xs">persisted,</text>
+  <text x="1044" y="260" class="xs">replayed on start</text>
+
+  <!-- write edges into tiers -->
+  <line x1="660" y1="164" x2="758" y2="164" class="w" marker-end="url(#aw)"/>
+  <path d="M660 516 H758" class="w" marker-end="url(#aw)"/>
+
+  <!-- query: one lookup into every tier -->
+  <path d="M660 346 H738" class="q" marker-end="url(#aq)"/>
+  <text x="664" y="336" class="ms">5 tiers</text>
+
+  <text x="40" y="606" class="s">Each tier is an exact-match map from an expanded term to a posting list of at most 20 suggestions. The query merges all tiers into one top 20.</text>
+</svg>

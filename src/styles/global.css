@@ -208,6 +208,10 @@ nav a:hover { border-color: var(--mustard); }
   padding-bottom: 48px;
   border-bottom: 1px solid var(--rule);
 }
+.lead-feature + .lead-feature { padding-top: 48px; }
+/* Second lead feature mirrors the first: text left, image right. */
+.lead-feature.flip { grid-template-columns: 5fr 7fr; }
+.lead-feature.flip .frame { order: 2; }
 .frame { background: #fff; border: 1px solid var(--ink); box-shadow: 6px 6px 0 var(--paper-2); }
 .frame img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform 0.4s; }
 .frame { overflow: hidden; }
@@ -256,6 +260,8 @@ footer a { color: var(--ink); border-bottom: 1px solid var(--mustard); }
   .hero .wrap { grid-template-columns: 1fr; min-height: 0; }
   .hero-art { display: none; }
   .lead-feature { grid-template-columns: 1fr; gap: 24px; }
+  .lead-feature.flip { grid-template-columns: 1fr; }
+  .lead-feature.flip .frame { order: 0; }
   .project-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 640px) {

@@ -30,9 +30,15 @@ const copy = {
       summary:
         'Consolidated dozens of separately deployed vertical search systems into one platform on Kubernetes: 4 clusters, 396 servers, 300+ businesses, 200k+ peak QPS.',
     },
+    leadKicker2: 'Lead feature · Systems · Patent',
+    lead2: {
+      name: 'KDS: a self-adaptive rebalancer for Kubernetes',
+      summary:
+        'A control loop that keeps Pods evenly spread without an operator. In tests it cut the spread from 2–30 Pods per node to 5–6. Granted Chinese invention patent CN112181605B.',
+    },
     projects: {
+      'WCS Suggest': ['Industry', 'Real-time query auto-completion for 58.com: characters, pinyin or initials in, top 20 suggestions out.'],
       Runtime2Test: ['Research', 'Turns live Java objects into replayable tests by combining ProDJ-style serialization with LLM generation.'],
-      KDS: ['Systems', 'A policy-based dynamic scheduler for Kubernetes that rebalances stateful and stateless workloads safely.'],
       'UniMap Condor': ['Tool', 'An interactive university map combining rankings, research metrics, and advisor discovery.'],
       'Daily OS': ['Agent', 'A Mac-first workflow agent that gathers signals, plans the day, and reports back to Feishu.'],
       DocuEngine: ['Product', 'An AI document engine that turns your facts into filing-ready legal, immigration and business documents, exported as editable Word.'],
@@ -54,9 +60,14 @@ const copy = {
       name: 'WCS：58 同城的多租户云搜索平台',
       summary: '把几十套各自部署的垂直搜索收敛成一个跑在 Kubernetes 上的平台：4 个集群、396 台服务器，承接 300+ 业务，峰值 QPS 20 万+。',
     },
+    leadKicker2: '头条 · 系统 · 专利',
+    lead2: {
+      name: 'KDS：Kubernetes 自适应负载均衡调度器',
+      summary: '不需要人值守的控制回路，让 Pod 始终均匀分布。实验中把每个节点 2–30 个 Pod 的悬殊分布收敛到 5–6 个。已获中国发明专利授权（CN112181605B）。',
+    },
     projects: {
+      'WCS Suggest': ['工业界', '58 同城的实时搜索提示引擎：输入汉字、拼音或首字母，返回最相关的 20 条提示。'],
       Runtime2Test: ['研究', '把运行中的 Java 对象变成可回放的测试，结合 ProDJ 式序列化与 LLM 生成。'],
-      KDS: ['系统', '面向 Kubernetes 的策略式动态调度器，为有状态与无状态负载安全地做再平衡。'],
       'UniMap Condor': ['工具', '交互式大学地图，整合排名、科研指标与导师发现。'],
       'Daily OS': ['Agent', 'Mac 优先的工作流 Agent：汇集信号、规划每一天，并把结果发回飞书。'],
       DocuEngine: ['产品', 'AI 文书生成引擎：根据你提供的事实，生成可直接提交的法律、移民与商业文件，并导出可编辑的 Word。'],
@@ -67,13 +78,13 @@ const copy = {
   },
 }[lang];
 
-// Entries with `url` link to a live site instead of the GitHub repo; `src` overrides the banner path.
+// Entries with `url` link to a live site and `href` to a page on this site, instead of the GitHub repo; `src` overrides the banner path.
 const projects = [
   { name: 'Daily OS', url: 'https://alexli-77.github.io/daily-os/', image: 'daily-os-feishu', tags: 'TypeScript · Swift · Agent' },
   { name: 'DocuEngine', url: 'https://www.docuengineai.com/', src: '/assets/projects/docuengine/cover.svg', tags: 'React · Gemini · Supabase' },
   { name: 'UniMap Condor', url: 'https://www.unimapcondor.com/', image: 'unimap-condor', tags: 'React · MapLibre · OpenAlex' },
+  { name: 'WCS Suggest', href: '/projects/wcs-suggest/', src: '/assets/projects/wcs-suggest/cover.svg', tags: 'C++ · FST · Real-time indexing' },
   { name: 'Runtime2Test', repo: 'Runtime2Test', image: 'runtime2test', tags: 'Java · LLM · Software Testing' },
-  { name: 'KDS', repo: 'KDS', image: 'kds', tags: 'Go · Kubernetes' },
   { name: 'Kestrel', repo: 'kestrel', image: 'kestrel', tags: 'JavaScript · Automation' },
   { name: 'Knowledge Base Template', repo: 'Leon-knowledgeBase-template', image: 'leon-knowledgebase-template', tags: 'Obsidian · Claude Code' },
   { name: 'Skills for Self-Management', repo: 'skills-self-management', image: 'skills-self-management', tags: 'Agent Skills · Planning' },
@@ -138,7 +149,7 @@ const projects = [
     <div class="wrap">
       <div class="section-head">
         <h2>{copy.projectsTitle} <span>{copy.projectsSub}</span></h2>
-        <span class="kicker">{String(projects.length + 1).padStart(2, '0')} {copy.entries}</span>
+        <span class="kicker">{String(projects.length + 2).padStart(2, '0')} {copy.entries}</span>
       </div>
 
       <a class="lead-feature" href={localize(lang, '/projects/wcs-cloud-search/')}>
@@ -152,15 +163,31 @@ const projects = [
         </div>
       </a>
 
+      <a class="lead-feature flip" href={localize(lang, '/projects/kds/')}>
+        <div class="frame"><img src="/assets/github/kds.png" alt="KDS banner" /></div>
+        <div>
+          <span class="kicker">{copy.leadKicker2}</span>
+          <h3>{copy.lead2.name}</h3>
+          <p>{copy.lead2.summary}</p>
+          <div class="tags">Go · Kubernetes · Scheduling</div>
+          <span class="read-more">{copy.readCase}</span>
+        </div>
+      </a>
+
       <div class="project-grid">
         {projects.map((p, i) => {
           const [kind, summary] = copy.projects[p.name];
           return (
-            <a class="card" href={'url' in p ? p.url : `https://github.com/alexli-77/${p.repo}`} target="_blank" rel="noopener">
+            <a
+              class="card"
+              {...('href' in p
+                ? { href: localize(lang, p.href) }
+                : { href: 'url' in p ? p.url : `https://github.com/alexli-77/${p.repo}`, target: '_blank', rel: 'noopener' })}
+            >
               <div class="frame">
                 <img src={'src' in p ? p.src : `/assets/github/${p.image}.png`} alt={`${p.name} banner`} loading="lazy" />
               </div>
-              <span class="num">{String(i + 2).padStart(2, '0')} — {kind}</span>
+              <span class="num">{String(i + 3).padStart(2, '0')} — {kind}</span>
               <h3>{p.name}</h3>
               <p>{summary}</p>
               <div class="tags">{p.tags}</div>
