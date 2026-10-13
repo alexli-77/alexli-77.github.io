@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" role="img" aria-label="KDS architecture: a controller reads cluster state, scores nodes, regenerates the policy, and an operator evicts Pods from overloaded nodes so kube-scheduler re-places them">
+  <style>
+    .t { font: 600 15px Inter, -apple-system, "Helvetica Neue", Arial, sans-serif; fill: #102a42; }
+    .s { font: 400 12px Inter, -apple-system, "Helvetica Neue", Arial, sans-serif; fill: #48647f; }
+    .xs { font: 400 11px Inter, -apple-system, "Helvetica Neue", Arial, sans-serif; fill: #48647f; }
+    .k { font: 500 11px "JetBrains Mono", ui-monospace, Menlo, monospace; letter-spacing: 0.12em; fill: #7a5c10; }
+    .m { font: 400 12px "JetBrains Mono", ui-monospace, Menlo, monospace; fill: #102a42; }
+    .ms { font: 400 11px "JetBrains Mono", ui-monospace, Menlo, monospace; fill: #617d98; }
+    .h1 { font: 600 24px Fraunces, Georgia, serif; fill: #102a42; }
+    .box { fill: #ffffff; stroke: #102a42; stroke-width: 1.2; }
+    .hot { fill: #fceec5; stroke: #102a42; stroke-width: 1.2; }
+    .zone { fill: none; stroke: #617d98; stroke-width: 1.2; stroke-dasharray: 5 4; }
+    .a { fill: none; stroke: #c8961e; stroke-width: 2.2; }
+    .pod { stroke: #102a42; stroke-width: 1; }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c8961e"/></marker>
+  </defs>
+
+  <rect width="1200" height="640" fill="#fffaeb"/>
+  <text x="40" y="48" class="h1">KDS: a closed control loop over the cluster</text>
+  <text x="40" y="74" class="s">Runs every interval, outside the cluster it balances. No operator in the loop.</text>
+
+  <!-- Controller -->
+  <rect x="40" y="100" width="1120" height="230" rx="10" class="zone"/>
+  <text x="56" y="122" class="k">CONTROLLER</text>
+
+  <rect x="60" y="140" width="270" height="170" rx="8" class="box"/>
+  <text x="76" y="166" class="t">1 · Data Collector</text>
+  <text x="76" y="192" class="s">cluster monitor via client-go</text>
+  <text x="76" y="212" class="s">reads nodes, Pods, requests</text>
+  <text x="76" y="244" class="ms">interval · node-selector</text>
+  <text x="76" y="262" class="ms">max-pods-node · evict-mode</text>
+  <text x="76" y="280" class="ms">dry-run</text>
+
+  <rect x="360" y="140" width="270" height="170" rx="8" class="box"/>
+  <text x="376" y="166" class="t">2 · Preprocessor</text>
+  <text x="376" y="192" class="s">filter by node selector,</text>
+  <text x="376" y="210" class="s">drop unschedulable nodes</text>
+  <text x="376" y="236" class="s">skip DaemonSet &amp; critical Pods</text>
+  <text x="376" y="262" class="s">map node → Pods, grouped by</text>
+  <text x="376" y="280" class="s">QoS class</text>
+
+  <rect x="660" y="140" width="270" height="170" rx="8" class="hot"/>
+  <text x="676" y="166" class="t">3 · Data Processor</text>
+  <text x="676" y="194" class="m">u = α·cpu + β·mem + γ·pods</text>
+  <text x="676" y="222" class="s">score and rank every node</text>
+  <text x="676" y="242" class="s">compare high / low nodes with</text>
+  <text x="676" y="260" class="s">the cluster average</text>
+  <text x="676" y="286" class="s">regenerate thresholds</text>
+
+  <line x1="330" y1="225" x2="358" y2="225" class="a" marker-end="url(#ah)"/>
+  <line x1="630" y1="225" x2="658" y2="225" class="a" marker-end="url(#ah)"/>
+  <line x1="930" y1="225" x2="958" y2="225" class="a" marker-end="url(#ah)"/>
+
+  <!-- policy.yaml -->
+  <path d="M960 160 H1114 L1140 186 V290 H960 Z" class="box"/>
+  <path d="M1114 160 V186 H1140" fill="none" stroke="#102a42" stroke-width="1.2"/>
+  <text x="974" y="184" class="t">policy.yaml</text>
+  <text x="974" y="212" class="ms">LowThresholds</text>
+  <text x="974" y="230" class="ms">HighThresholds</text>
+  <text x="974" y="248" class="ms">cpu · memory · pods</text>
+  <text x="974" y="276" class="xs">rewritten every round</text>
+
+  <!-- Operator -->
+  <rect x="640" y="400" width="520" height="190" rx="8" class="hot"/>
+  <text x="656" y="426" class="k">OPERATOR</text>
+  <text x="656" y="454" class="t">Evict from overloaded nodes</text>
+  <text x="656" y="480" class="s">pick Pods on high nodes, lowest QoS first:</text>
+  <text x="656" y="500" class="m">BestEffort → Burstable → Guaranteed</text>
+  <text x="656" y="526" class="s">at most max-pods-node Pods per node per round</text>
+  <text x="656" y="546" class="s">evict through the Kubernetes Eviction API</text>
+  <text x="656" y="572" class="s">stops once every node is within 1 of the average</text>
+
+  <path d="M1050 290 V398" class="a" marker-end="url(#ah)"/>
+
+  <!-- Cluster -->
+  <rect x="40" y="400" width="520" height="190" rx="8" class="box"/>
+  <text x="56" y="426" class="k">KUBERNETES CLUSTER</text>
+
+  <g>
+    <rect x="62" y="440" width="104" height="104" rx="6" fill="#fffdf5" stroke="#102a42"/>
+    <g class="pod" fill="#e9b949">
+      <rect x="72" y="450" width="22" height="22" rx="3"/><rect x="100" y="450" width="22" height="22" rx="3"/><rect x="128" y="450" width="22" height="22" rx="3"/>
+      <rect x="72" y="478" width="22" height="22" rx="3"/><rect x="100" y="478" width="22" height="22" rx="3"/><rect x="128" y="478" width="22" height="22" rx="3"/>
+      <rect x="72" y="506" width="22" height="22" rx="3"/><rect x="100" y="506" width="22" height="22" rx="3" fill="#fff" stroke-dasharray="3 2"/>
+    </g>
+    <text x="114" y="562" class="ms" text-anchor="middle">high</text>
+  </g>
+  <g>
+    <rect x="184" y="440" width="104" height="104" rx="6" fill="#fffdf5" stroke="#102a42"/>
+    <g class="pod" fill="#e9b949">
+      <rect x="194" y="450" width="22" height="22" rx="3"/><rect x="222" y="450" width="22" height="22" rx="3"/><rect x="250" y="450" width="22" height="22" rx="3"/>
+      <rect x="194" y="478" width="22" height="22" rx="3"/>
+    </g>
+    <text x="236" y="562" class="ms" text-anchor="middle">avg</text>
+  </g>
+  <g>
+    <rect x="306" y="440" width="104" height="104" rx="6" fill="#fffdf5" stroke="#102a42"/>
+    <g class="pod" fill="#e9b949">
+      <rect x="316" y="450" width="22" height="22" rx="3"/><rect x="344" y="450" width="22" height="22" rx="3"/><rect x="372" y="450" width="22" height="22" rx="3"/>
+      <rect x="316" y="478" width="22" height="22" rx="3"/>
+    </g>
+    <text x="358" y="562" class="ms" text-anchor="middle">avg</text>
+  </g>
+  <g>
+    <rect x="428" y="440" width="104" height="104" rx="6" fill="#fffdf5" stroke="#102a42"/>
+    <g class="pod" fill="#e9b949">
+      <rect x="438" y="450" width="22" height="22" rx="3"/><rect x="466" y="450" width="22" height="22" rx="3"/>
+      <rect x="494" y="450" width="22" height="22" rx="3" fill="#fceec5" stroke-dasharray="3 2"/>
+    </g>
+    <text x="480" y="562" class="ms" text-anchor="middle">low</text>
+  </g>
+  <!-- evicted Pod lands on the low node via kube-scheduler -->
+  <path d="M111 506 C 160 400, 450 400, 505 448" fill="none" stroke="#102a42" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#ah)"/>
+  <text x="300" y="582" class="xs" text-anchor="middle">evicted Pods are re-placed on low nodes by kube-scheduler</text>
+
+  <!-- loop edges -->
+  <path d="M638 495 H562" class="a" marker-end="url(#ah)"/>
+  <text x="600" y="486" class="xs" text-anchor="middle">evict</text>
+  <path d="M195 400 V312" class="a" marker-end="url(#ah)"/>
+  <text x="203" y="362" class="xs">cluster state</text>
+
+  <text x="40" y="620" class="s">Redrawn from the KDS paper (Figures 1–2). Weights α, β, γ and every flag above are set per cluster.</text>
+</svg>

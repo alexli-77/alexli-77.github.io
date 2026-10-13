@@ -44,6 +44,12 @@ The system has a data plane and a control plane. Everything runs on Kubernetes.
 - Route tables, schemas and segmentation dictionaries are pushed to the config center (WConfig), and merger shard lists to etcd. Proxies hot-reload them without a restart.
 - Metrics flow through Micrometer → Kafka, Prometheus and Elasticsearch. Alerts go out by SMS, phone call and WeChat.
 
+The console in use: the app list a business team sees.
+
+![The WCS console: app list](/assets/projects/wcs-cloud-search/console.jpg)
+
+*Screens from the sandbox environment, recorded for internal training. Personal details are blurred.*
+
 ## Key design decisions
 
 **1. Two-layer proxy: distribution separated from business logic.**
