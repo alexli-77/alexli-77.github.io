@@ -44,6 +44,12 @@ meta: ["2018–2023", "资深后端开发工程师", "峰值 QPS 20 万+"]
 - 路由表、schema、分词词典推到配置中心（WConfig），merger 的分片列表写 etcd，proxy 热加载，不重启；
 - 监控走 Micrometer → Kafka、Prometheus 和 ES，告警通过短信 / 电话 / 微信送达。
 
+下面是控制台的实际界面：业务方看到的应用列表。
+
+![WCS 控制台：应用列表](/assets/projects/wcs-cloud-search/console.jpg)
+
+*截图来自沙箱环境的内部培训录屏，个人信息已打码。*
+
 ## 关键设计
 
 **1. 两层 proxy：分发和业务逻辑分开。**

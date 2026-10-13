@@ -60,6 +60,12 @@ KDS 分成两层：Controller 负责决策，Operator 负责执行。
 - **开销可以忽略。** KDS 部署在集群外，每个周期读一次集群状态。周期设为 60 秒时，对 API server 的请求约为每秒 0.017 次。
 - **专利。** 该方法于 2025 年获中国发明专利授权，专利号 CN112181605B。
 
+## 线上实况
+
+![线上集群中一个应用的搜索 Pod](/assets/projects/kds/dashboard.jpg)
+
+*线上集群中某个搜索应用的 Kubernetes Dashboard：各分片 Deployment 副本数全部就绪，searcher 和 merger Pod 分布在不同节点上。镜像仓库地址已打码。*
+
 ## 我的角色
 
 - 在 WCS 的线上运维中发现问题，设计了 KDS 来解决它

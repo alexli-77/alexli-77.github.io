@@ -60,6 +60,12 @@ The paper evaluates KDS on a 20-node test cluster running the cloud search appli
 - **Negligible overhead.** KDS runs outside the cluster and reads cluster state once per interval. At a 60-second interval that is about 0.017 requests per second against the API server.
 - **Patent.** The method was granted Chinese invention patent CN112181605B in 2025.
 
+## In production
+
+![Search Pods of one app on a production cluster](/assets/projects/kds/dashboard.jpg)
+
+*The Kubernetes dashboard for one search app on a production cluster: shard Deployments at full replica count, and searcher and merger Pods spread across nodes. Image registry addresses are blurred.*
+
 ## My role
 
 - Found the problem while running WCS in production, and designed KDS to solve it

@@ -18,6 +18,10 @@ Every vertical on 58.com (cars, housing, jobs) has a search box, and every searc
 
 The first version, built by my teammates, served a static index built from a data file. Adding or deleting a single suggestion meant rebuilding and reloading the whole index. Businesses wanted to write and delete suggestions in real time, the same way they used the rest of WCS.
 
+![Contact search in 58's internal IM](/assets/projects/wcs-suggest/contact-search.jpg)
+
+*Contact search in 58.com's internal messenger, one of the products served by the engine. Left to right: prefix (`liyang`), Chinese infix (`明明` matches 裴明明 and 张明明) and pinyin initials (`wy` matches 汪洋 and 王勇). Photos are blurred.*
+
 ## How it works
 
 ![Term expansion](/assets/projects/wcs-suggest/terms.svg)

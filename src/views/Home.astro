@@ -63,15 +63,15 @@ const copy = {
 // Work projects are closed source, so each links to its own page on this site. Lead features alternate image left / right.
 const work = [
   { key: 'wcs', href: '/projects/wcs-cloud-search/', src: '/assets/projects/wcs-cloud-search/cover.svg', alt: 'WCS cover: apps routed through route proxies to 4 search clusters', tags: 'Java · Kubernetes · Search' },
-  { key: 'kds', href: '/projects/kds/', src: '/assets/github/kds.png', alt: 'KDS banner', tags: 'Go · Kubernetes · Scheduling' },
+  { key: 'kds', href: '/projects/kds/', src: '/assets/projects/kds/cover.svg', alt: 'KDS: search Pods on a production Kubernetes cluster', tags: 'Go · Kubernetes · Scheduling' },
   { key: 'suggest', href: '/projects/wcs-suggest/', src: '/assets/projects/wcs-suggest/cover.svg', alt: 'WCS Suggest cover: typing bao suggests 宝马X5', tags: 'C++ · FST · Real-time indexing' },
 ] as const;
 
-// Products link to their live sites; `src` overrides the banner path under /assets/github/.
+// Products link to their live sites; covers are real screenshots under /assets/projects/.
 const products = [
-  { name: 'Daily OS', url: 'https://alexli-77.github.io/daily-os/', image: 'daily-os-feishu', tags: 'TypeScript · Swift · Agent' },
+  { name: 'Daily OS', url: 'https://alexli-77.github.io/daily-os/', src: '/assets/projects/daily-os/cover.svg', tags: 'TypeScript · Swift · Agent' },
   { name: 'DocuEngine', url: 'https://www.docuengineai.com/', src: '/assets/projects/docuengine/cover.svg', tags: 'React · Gemini · Supabase' },
-  { name: 'UniMap Condor', url: 'https://www.unimapcondor.com/', image: 'unimap-condor', tags: 'React · MapLibre · OpenAlex' },
+  { name: 'UniMap Condor', url: 'https://www.unimapcondor.com/', src: '/assets/projects/unimap/cover.svg', tags: 'React · MapLibre · OpenAlex' },
 ] as const;
 ---
 
@@ -168,7 +168,7 @@ const products = [
           return (
             <a class="card" href={p.url} target="_blank" rel="noopener">
               <div class="frame">
-                <img src={'src' in p ? p.src : `/assets/github/${p.image}.png`} alt={`${p.name} banner`} loading="lazy" />
+                <img src={p.src} alt={`${p.name} cover`} loading="lazy" />
               </div>
               <span class="num">{String(i + 1).padStart(2, '0')} — {kind}</span>
               <h3>{p.name}</h3>
