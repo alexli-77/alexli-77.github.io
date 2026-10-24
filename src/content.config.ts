@@ -11,6 +11,8 @@ const writing = defineCollection({
     dek: z.string(),
     kind: z.enum(['Essay', 'Research', 'Notes']).default('Notes'),
     draft: z.boolean().default(false),
+    // zh posts appear only under /zh/writing/; the Chinese list also shows the English posts.
+    lang: z.enum(['en', 'zh']).default('en'),
   }),
 });
 

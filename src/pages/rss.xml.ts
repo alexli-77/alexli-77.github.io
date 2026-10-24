@@ -3,7 +3,7 @@ import type { APIContext } from 'astro';
 import { getPosts } from '../lib/posts';
 
 export async function GET(context: APIContext) {
-  const posts = await getPosts();
+  const posts = await getPosts('en');
   return rss({
     title: 'Léon — Writing',
     description: 'Notes and essays by Yang (Léon) Li on software testing, LLMs, and systems.',

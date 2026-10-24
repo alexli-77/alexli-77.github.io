@@ -12,7 +12,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = ui[lang];
-const posts = (await getPosts()).slice(0, 3);
+const posts = (await getPosts(lang)).slice(0, 3);
 const contact = localize(lang, '/contact/');
 
 const copy = {

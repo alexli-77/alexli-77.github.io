@@ -3,8 +3,12 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 export type Post = CollectionEntry<'writing'>;
 
 // Drafts show up in `npm run dev` but never in the published build.
-export async function getPosts() {
-  const posts = await getCollection('writing', ({ data }) => import.meta.env.DEV || !data.draft);
+// English pages list English posts only; Chinese pages list both languages.
+export async function getPosts(lang: 'en' | 'zh' = 'en') {
+  const posts = await getCollection(
+    'writing',
+    ({ data }) => (import.meta.env.DEV || !data.draft) && (lang === 'zh' || data.lang === 'en'),
+  );
   return posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 }
 

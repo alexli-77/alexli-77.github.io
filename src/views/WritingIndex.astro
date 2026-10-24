@@ -10,7 +10,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = ui[lang];
-const posts = await getPosts();
+const posts = await getPosts(lang);
 ---
 
 <Base title={`${t.writingTitle} — Léon`}>
