@@ -30,6 +30,8 @@ On the navy band: headings `#fffaeb`, body `#bcccdc`, meta `#829ab0`, accents `-
 
 Type: headlines in **Fraunces** (600, plus 400 italic for emphasis). Body in **Inter** 17px/1.65. All meta (kickers, dates, tags, counts) in **JetBrains Mono** 12px, uppercase, letter-spacing 0.06–0.12em.
 
+Size scale is Medium-like, at the user's request. Section `h2` maxes out at 32px. Lead feature titles are 28px (24px on mobile). Card and post-list titles are 20–22px. Summaries are 16px/1.6. Only the hero `h1` and article `h1` are display-size. Don't scale headings up to fill space; add whitespace instead.
+
 Layout: `.wrap` caps width at 1200px with a fluid `--gutter`. The cover uses a 12-column grid (lede spans 7, sidebar spans 4 from column 9). Breakpoints are 960px (stack to one column) and 640px (mobile).
 
 ## Rules
